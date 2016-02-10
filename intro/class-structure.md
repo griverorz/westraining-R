@@ -3,7 +3,7 @@
 ### Overview 
 
 The class is a general introduction to the R language. It does not intend to be
-comprehensive, but it is very ambitious which means that we will cover a lot of ground in just three days. It also means that, sadly, we will not look into many details. I have preferred to give you an overview of a number of things that I find useful rather than delving into any particular issue. The decision is partly guided from the fact that I will not assume any background (or even interest) in computer programming. However, I will make the rather natural assumption that all of you have both experience with
+comprehensive, but it is very ambitious which means that we will cover a lot of ground in just three days. It also means that, sadly, we will not look into many details. I have preferred to give you an overview of a number of things that I find useful rather than delving into any particular issue. The decision is partly guided from the fact that I will not assume any background (or even interest) in computer programming. However, I will make the rather undisputable assumption that all of you have both experience with
 statistics and with some statistical software.
 
 The goal of the class is to provide you enough understanding about R to allow
