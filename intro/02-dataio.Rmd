@@ -18,7 +18,7 @@ states <- data.frame("code"       = c("CA", "NY", "NE", "AZ"),
 
 We can access elements via indexing the same way as we would do in a `matrix` or we can access by name:
 ```{r eval=FALSE}
-states[, 2] 
+states[, 3] 
 states[, "region"]
 states$region
 ```
