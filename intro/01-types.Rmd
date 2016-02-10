@@ -1,0 +1,147 @@
+--- 
+title: "The R building blocks"
+author: "Gonzalo Rivero"
+date: "February, 10, 2016"
+output: html_document
+---
+
+### The interpreter
+
+Let's start using the interpreter and get used to the basic arithmetic operations. They all work the way you expect to. 
+
+```{r eval=FALSE}
+1 + 1
+sqrt(2)
+exp(1)
+2^3
+0 == log(1)
+```
+
+The same happens with comparisons:
+
+```{r eval=FALSE}
+1 > 1
+1 >= 1
+(1 + 1 == 2) | (1 + 1 == 3)
+(1 + 1 == 2) & (1 + 1 == 3)
+```
+
+We can assign values to a name using the _assignment operator_ `<-`. R also supports `=` for assignment but not everywhere and in any case `<-` is more widely used. For instance, we can now assign the value `1` to the variable `a`, and every time we call `a` we will get the value it is referred to:
+
+```{r eval=FALSE}
+a <- 1
+a
+```
+
+### Data types
+
+R offers a wide variety of data types. The most relevant ones are: _numeric_, _integer_, _character_, and _logical_.
+
+```{r eval=FALSE}
+1.0 # Numeric
+1 # "Integer"
+"ab" # Character
+TRUE # logical
+```
+
+The `#` indicates a comment, which may or may not be at the beginning of the line. 
+
+It also offers logical constants for missing value (`NA`), "Not a Number" (`NaN`) and positive and negative infinity (`Inf` and `-Inf`):
+
+```{r eval=FALSE}
+NA
+0/0
+1/0
+```
+
+You can test the type of an object using the `is.` functions (_"is `x` an integer?"_):
+```{r eval=FALSE}
+is.numeric(1.0)
+is.integer(1)
+is.character("ab")
+is.logical(FALSE)
+```
+
+A common mistake that we all make at some point (but hopefully you will not!) is to test whether an object is `NA` by using the `==` comparison:
+```{r}
+NA == NA
+```
+
+There are good reasons for these "odd" behavior: `NA` is not an assigned value. We have special functions to check whether an object is `NA`:
+
+```{r}
+is.na(NA)
+```
+and the same applies for `NaN`.
+
+Note that `is.numeric` is a _function,_ and all functions work the same way in R. They have a name followed by the argument(s) enclosed in parenthesis: `any_function(x)`
+
+### Data structures
+
+
+The most common (and intuitive) data structures are `vector`, `matrix`, `data.frame` and `list`.
+
+A `vector` holds data of the same type (or `NA`). Vectors can be created with the function `c`, which stands for "concatenate".
+
+```{r eval=FALSE}
+c(1, 2)
+c(1, 2, NA)
+c(1, "a") # See how the first element is casted into character!
+```
+
+There are a few functions that allows us to create vectors with particular structures. For instance, we can create a sequence using the function `seq`:
+
+```{r eval=FALSE}
+c(1, 2, 3, 4)
+seq(1, 4)
+1:4 # A shorthand for `seq`
+```
+
+See how we used a function with two (positional) arguments? It is probably a good moment to take a look at more information about `seq` using `?seq`
+
+A `matrix` is, unsurprisingly, a matrix: a rectangular table of elements of the same type. 
+
+```{r}
+A <- matrix(c(1, 2, 3, 4), nrow=2, ncol=2)
+A
+```
+
+Note how we passed all data as a unique object (a `vector`). Also notice how the matrix is filled. Contrary to intuition (but it makes perfect sense, if you think about it) is that a 1-dimensional `matrix` is not a `vector`.
+
+Operations in matrices work "kind of" the way you would expect:
+
+```{r}
+B <- matrix(c(4, 3, 2, 1), nrow=2)
+A * B
+A %*% B
+```
+
+See how the first operation is element-wise, while the second is the standard matrix multiplication. We also have common operations like extracting the diagonar (which is a `vector`) or calculating the transpose or the inverse:
+
+```{r eval=FALSE}
+t(A)
+diag(A)
+solve(A) # but A^-1
+```
+
+### Indexing
+
+Indexing allows us to access elements of a `vector` or `matrix` by position:
+
+```{r eval=FALSE}
+a <- c(1, 2, 3)
+a[1]
+a[1:2]
+a[-3]
+a[1] <- 0
+```
+
+A matrix is two dimensional, so we need to elements:
+```{r eval=FALSE}
+A <- matrix(c(1, 2, 3, 4), nrow=2)
+A[1, 1]
+A[1, ]
+A[, 1]
+A[2, 2] <- 0
+A[2, ] <- 0 # Recycling rule
+```
