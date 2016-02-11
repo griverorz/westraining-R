@@ -1,0 +1,106 @@
+--- 
+title: "Descriptives and simple statistics"
+author: "Gonzalo Rivero"
+date: "January, 31, 2016"
+output:	html_document
+extension: footnotes
+---
+
+Let's start by reading in some data from the Internet. 
+
+```{r}
+affairs <- read.csv("http://koaning.io/theme/data/affairs.csv")
+```
+
+The dataset contains data about the number of affairs of 601 politicians and some sociodemographic information. A detailed description of the variables and some interesting results can be found in Fair, R. (1977) "A note on the computation of the tobit estimator", Econometrica, 45, 1723-1727. 
+
+Let's start by taking a look at the dataset. For instance, we can print the first 6 rows using the function `head`:
+
+```{r}
+head(affairs)
+```
+
+We can also take a look at some descriptives with the function `summary` applied to individuals variables:[^1]
+
+[^1]: The function could be applied to a dataset but I find that amount of information overwhelming.
+
+```{r}
+summary(affairs$nbaffairs)
+```
+
+and
+
+```{r}
+summary(affairs$child)
+```
+
+Notice that `summary` does different things depending on the class of the input it receives. In the first case, `summary` sees a numeric variable and produces the mean and some cutpoints. In the second case, `summary` sees a factor variable (a categorical variable) and produces a frequency table. This is a pattern that we will encounter very frequently in R.
+
+We can be more specific about getting a frequency table by using:
+
+```{r}
+table(affairs$child)
+```
+
+To transform the previous table into a frequency we can take several routes, both illustrative of the way R works relative to software like SAS or Stata. The first one is to do it manually, by just dividing the frecuencies by the total size, calculated by summing over the column `children`. It is convenient here to remember that `child` is a factor that indicates whether the politician has children or not. Therefore, the number of observations is just the length of the vector.
+
+```{r}
+table(affairs$child)/length(affairs$child) ## We could also have used nrow(affairs)
+```
+
+Note that we don't create new variables in between but instead we perform the operation on-the-fly with the output of the two functions. The second option is to compose two functions together:
+
+```{r}
+prop.table(table(affairs$child))
+```
+
+The output of `table` is passed to `prop.table` which transforms a table into proportions.
+
+### Hypothesis testing
+
+We can now start analyzing the data. FOr instance, we would like to check the difference in the mean of the number of affairs by whether the politician has children or not. The sample mean for each group can be calculated as:
+
+```{r eval=FALSE}
+mean(affairs$nbaffairs[affairs$child == "yes"])
+mean(affairs$nbaffairs[affairs$child == "no"])
+```
+
+A t-test can be performed by using the function `t.test` with the formula interface. Formulas play a huge role in R:
+
+```{r}
+my_test <- t.test(nbaffairs ~ child, data=affairs)
+my_test
+```
+
+The LHS is the variable we want to test but split by the groups indicated in the RHS. The argument `data` indicates where those two variables live: they are columns of the dataset `affairs`. The formula interface probably makes a lot more sense if we consider how we would run the same test using a linear model, which we will see in a moment. The outcome variable is the LHS of the equation in which we separate the equal sign with a `~`. The RHS is a dummy variable (a factor) that splits the sample in two groups.
+
+Note that we have not just printed the output of running the t-test. Instead, we have assigned a name to that output, because it is an object that contains a lot more information than what is printed in the screen. This is the most distinctive feature of R with respect to other statistical languages. 
+
+We can inspect the contents of the `my_test` object using the function `str`:
+
+```{r}
+str(my_test)
+```
+
+Note that `my_test` is a list that contains all the information pertaining to the t-test we ran. It contains the statistic, the degrees of freedom, the confidence interval, ... and more importantly, we can access all of those elements and use them elsewhere. For instance, we can get the test statistic from the element `statistic`:
+
+```{r}
+my_test$statistic
+```
+
+Let's take a deeper look into the formula interface and the structure of objects using a linear model.
+
+## The formula interface 
+
+Consider the case in which we can to now run a regression on the number of affairs using information about. Do not much attention to the theortical soundness of the analysis.
+
+```{r}
+sample_model <- lm(nbaffairs ~ I(age - 18)*child + factor(religious), data=affairs)
+sample_model
+```
+
+Notice that `religious` was a numeric variable, that we now casted into categorical (dummy - 1)[^1]
+
+We could have 
+
+## Accessors
