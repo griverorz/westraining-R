@@ -1,0 +1,82 @@
+--- 
+title: "Figures using ggplot2"
+author: "Gonzalo Rivero"
+date: "February, 11, 2016"
+output: html_document
+---
+
+The graphical toolbox in R is particularly impressive. I very much like the default plotting library that ships with R: it is clear, simple, and you can build pretty much any figure you can imagine, because it allows to add and manipulate every single element of the figure. However, its flexibility comes at a cost, and figures usually require a lot of work. The `ggplot2`, which implements the "grammar of graphics" approach to building data visualization, has rightfully gained a great deal of popularity, and it is the library that we will use here. 
+
+It is also a good opportunity to look at importing functionality. 
+
+We first need to install the library using:
+```{r eval=FALSE}
+install.packages("ggplot2")
+```
+
+The function will hit a CRAN mirror, download the file for the package that we want, and perform the installation routine (which includes a number of checks). We can now load all the functions that come with the package using:
+
+```{r}
+library(ggplot2)
+```
+
+We can also read the dataset:
+
+```{r}
+tobacco <- read.csv("http://koaning.io/theme/data/cigarette.csv")
+```
+
+The structure of a figure in ggplot2 is simple and consistent. We first define the data.frame that we will be using, the basic aesthetics for the figure (which variables go to which axis, is the data grouped) using the `ggplot` function, and then we add one by one the layers. For instance, to define a density plot, all we need is one variable living in a dataset:
+
+```{r}
+p <- ggplot(tobacco, aes(x=tax))
+p + geom_density()
+```
+
+Getting one density per year is easy:
+```{r}
+p <- ggplot(tobacco, aes(x=tax, group=year, colour=year))
+p + geom_density() +
+    labs(title="Something", x="Age", y="Count")
+```
+
+A scatterplot:
+```{r}
+p <- ggplot(tobacco, aes(x=packpc, y=tax))
+p + geom_point() +
+    labs(title="Something", x="Age", y="Count")
+```
+
+We can add a smoother:
+```{r}
+p <- ggplot(tobacco, aes(x=packpc, y=tax))
+p + geom_point() +
+    labs(title="Something", x="Age", y="Count") + 
+    geom_line(stat="smooth", formula= y ~ log(x), method="lm")
+```
+
+We can add one smoother per group and make it look prettier.
+```{r}
+p <- ggplot(tobacco, aes(x=packpc, y=tax, group=state, colour=state))
+p + labs(title="Something", x="Age", y="Count") + 
+    geom_line(stat="smooth", formula= y ~ log(x), method="lm", se=FALSE, alpha=0.5) +
+    geom_point(aes(colour=state), shape=1) +
+    scale_y_continuous(limits=c(0, 100)) + 
+    theme(legend.position="none")
+```
+
+The feature that I like the most from ggplot is that it is very easy to get conditional plots:
+```{r}
+tobacco$rich <- tobacco$income >= quantile(tobacco$income, 0.5) # Not what we want
+
+state_income <- ave(tobacco$income, tobacco$state) # We will see more general ways to do this 
+tobacco$rich <- state_income >= quantile(state_income, 0.5)
+
+p <- ggplot(tobacco, aes(x=packpc, y=tax, group=state, colour=state))
+p + labs(title="Something", x="Age", y="Count") + 
+    geom_line(stat="smooth", formula= y ~ log(x), method="lm", se=FALSE, alpha=0.75) +
+    geom_point(shape=1) +
+    scale_y_continuous(limits=c(0, 100)) + 
+    theme(legend.position="none") +
+    facet_wrap(~ rich)
+```
