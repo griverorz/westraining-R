@@ -1,0 +1,53 @@
+## Split-apply-combine
+
+Base R provides functions to accomplish this, but I prefer `plyr`.
+
+Consider again our tobacco example and the problem that we had about calculating
+group means. We used a very specific function, `ave` that did precisely that.
+But the operation is actually a lot more general. We can think about spliting
+data structures by gropus, performing operations in each group and then grouping
+things again. This is what plyr does, in a common, clear interface. 
+
+The usage is very similar across functions. The first argument is the input data (a data.frame or a list). Then, how the input is split into groups (notice that a list does not need to be split), and then a description of the operation to be applied to each group. With a couple of examples it will become a lot clearer:
+
+```{r}
+library(plyr)
+tobacco <- read.csv("http://koaning.io/theme/data/cigarette.csv")
+```
+
+```{r}
+group_means <- ddply(tobacco, ~ state, mutate, avincome=mean(income))
+head(group_means)
+```
+
+```{r}
+group_means <- ddply(tobacco, ~ state, summarize, avincome=mean(income))
+head(group_means)
+```
+
+We can be a bit fancy:
+```{r}
+lm_models <- dlply(tobacco, ~ state, function(x) lm(packpc ~ log(tax), data=x))
+lm_coefs <- ldply(lm_models, coefficients)
+head(lm_coefs)
+```
+
+### Merging two datasets
+
+From the moment a `data.frame` is an object, we can hold as many as our computer allows. And we can put them together and merge
+them. 
+
+```{r}
+merged_tobacco <- merge(tobacco, group_means, by="state")
+head(merged_tobacco)
+```
+
+### Reshaping a dataset
+
+We can change the structure and reshape the data.
+
+```{r}
+library(reshape2)
+molten_tobacco <- melt(tobacco[, c("state", "year", "tax")], id=c("state", "year"))
+head(dcast(molten_tobacco, state ~ variable + year))
+```
