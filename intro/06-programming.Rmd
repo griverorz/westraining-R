@@ -1,0 +1,100 @@
+--- 
+title: "The very basics of programming"
+author: "Gonzalo Rivero"
+date: "February, 12, 2016"
+output:	html_document
+---
+
+One of the very nice features of R when one comes from other statistical software like SAS or Stata is that it is very easy to program. And that is a really good thing, because the manipulation, analysis, and visualization of data is considerably easier when one can write small functions. In addition, because R is open-source, you can inspect what every function does, so it is useful to get a sense of the most basic elements of programming to be able to take advantage of that feature.
+
+### Defining functions
+
+Think about functions as a way of packing operations in one reusable expression. For instance, consider a trivial example in which we want to calculate a mean. Instead of doing `sum` over `length` in every situation, we could just pack those operations together and give them a name:
+
+```{r}
+my_mean <- function(x) sum(x)/length(x)
+my_mean(c(0, 1))
+```
+
+To define a function, we use the keyword `function` followed by parenthesis and (optionally) the arguments that the function takes, and the expression that the function runs. We then assign this function to a name, in this case, `my_mean`. 
+
+See how typing `my_mean` allows you to see what you have just defined.
+
+```{r}
+my_mean
+```
+
+The way we defined the function is perfectly valid but we could also be a bit more explicit by enclosing the statement in parenthesis and ensuring that it is returned.
+
+```{r}
+my_mean <- function(x) {
+  return(sum(x)/length(x))
+}
+```
+
+Now that we have the fundamentals of how to define a function, let's take a look at control flow operations.
+
+### Loops
+
+`for` allows us to iterate and repeat an operation over a sequence. As you can imagine, we need to be explicit about two things: the sequence and the variable that will be taking values over that sequence. 
+
+```{r}
+for (i in 1:5) print(i)
+```
+
+Let's see a less trivial example in which we want to calculate the cumulative sum of a vector (already provided in R as `cumsum`):
+
+```{r}
+myvector <- c(1, 2, 3, 4)
+out <- 0
+for (i in 1:length(myvector)) {
+  out <- myvector[i] + out
+}
+out
+```
+
+Here `out` will hold the result of progressively adding the values of `myvector`. Notice how `i` takes, in each iteration, a different value in the sequence between 1 and the length of `myvector` that we then use to retrieve the value in each position. 
+
+Depending on the context, it will probably make sense to wrap this operations in a function. At the end of the day, the only thing that will change in different calculations of a cummulative sum is the vector it operates over, so we can _parametrize_ over that vector:
+
+
+```{r}
+my_cumsum <- function(x) {
+  out <- 0
+  for (i in 1:length(x)) {
+    out <- x[i] + out
+  }
+  return(out)
+}
+my_cumsum(c(1, 2, 3, 4))
+```
+
+Another way to build loops is with the statement `while`. It will evaluate an expression until a condition is not met:
+
+```{r}
+i <- 0
+while (i < 3) {
+  print(i)
+  i <- i + 1
+}
+```
+
+The thing to notice is that how in each iteration of the loop, the value of `i` changes: when it takes the value 3, the condition `i < 3` evaluates to FALSE, and the loop stops --and therefore, 3 is not printed to the screen.
+
+There are some cases in which the use of `which` is natural, like when we want to run algorithms until something converges. Take for instance the calculation of Newton-Raphson:
+```{r}
+tol <- 0.01
+x.last <- 10; diff <- 1
+while (abs(diff) > tol) {
+    x <- x.last - (x.last^2)/(2*x.last)
+    diff <- (x - x.last)
+    x.last <- x
+    print(x)
+}
+```
+
+However, `while` may end up producing infinite loops if one is not careful.
+
+### Conditionals
+
+### All together
