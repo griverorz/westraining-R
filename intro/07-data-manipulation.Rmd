@@ -1,46 +1,60 @@
+---
+title: "More data manipulation"
+author: "Gonzalo Rivero"
+date: "February, 13, 2016"
+output: html_document
+---
+
+R packs a lot of functionality to make data manipulation easier, and it is impossible to even give an overview of the array of tools that are available in this little space. However, the majority of the things I end up doing fall in three categories: apply some function to a grouping of the data, merging separate datasets, or reshaping data. Moreover, I think they summarize nicely they way R works.
+
 ## Split-apply-combine
 
-Base R provides functions to accomplish this, but I prefer `plyr`.
-
-Consider again our tobacco example and the problem that we had about calculating
-group means. We used a very specific function, `ave` that did precisely that.
-But the operation is actually a lot more general. We can think about spliting
-data structures by gropus, performing operations in each group and then grouping
-things again. This is what plyr does, in a common, clear interface. 
-
-The usage is very similar across functions. The first argument is the input data (a data.frame or a list). Then, how the input is split into groups (notice that a list does not need to be split), and then a description of the operation to be applied to each group. With a couple of examples it will become a lot clearer:
+Consider again our tobacco example and the problem that we had about calculating group means. We used a specific function, `ave` that did precisely that. But the operation is actually a lot more general. We can think about spliting data structures by gropus, performing operations in each group and then grouping things again. Base R provides functions to accomplish this kind of tasks, but I personally prefer the functions in the `plyr` package, because they provide a common, clear, and intuitive interface.
+ 
+The usage is very similar across functions. The first argument is the input data (such as a `data.frame` or a `list`). Then, a variable that tells how the input should be split into groups, although it may not be needed --think about a `list`. Finally, a description of the operation to be applied to each group. The logic will become clearer with a couple of examples. Let's start by realizing that `plyr` is not shipped with R. After installing it, we can load it and also read in some data.
 
 ```{r}
 library(plyr)
 tobacco <- read.csv("http://koaning.io/theme/data/cigarette.csv")
 ```
 
+Let's calculate the average income per state (across years). The name of the function gives a lot information: the first letter `d` says that the input will be a `data.frame`; the second letter, that the output will be another data.frame. All functions in `plyr` use the same input-output structure:
+
 ```{r}
 group_means <- ddply(tobacco, ~ state, mutate, avincome=mean(income))
 head(group_means)
 ```
+
+See how the grouping is passed as a formula, and now we are giving a name `avincome` to the newly created variable, which is the mean of the `income` variable. The `mutate` argument indicates that we want to perserve the number of rows in the dataset. Compare the output with what happens when we use `summarize` which says that we only one one value per group:
 
 ```{r}
 group_means <- ddply(tobacco, ~ state, summarize, avincome=mean(income))
 head(group_means)
 ```
 
-We can be a bit fancy:
+Let's explore a bit more complex example that calculates a separate regression between `packpc` and `log(tax)` for each state and then pulls all the coefficients together.
+
 ```{r}
 lm_models <- dlply(tobacco, ~ state, function(x) lm(packpc ~ log(tax), data=x))
 lm_coefs <- ldply(lm_models, coefficients)
 head(lm_coefs)
 ```
 
+Several things are worth noting. First, that we are first transforming a `data.frame` into a `list` (`dlply`), and then a `list` into a `data.frame` (`ldply`). Can you see why? Second, that the function in our `dlply` called is passed as a anonymous function which takes the data for each country as argument. This is a very common strategy in R: we need a temporary function for a one-off task and we don't even need a name for it. In this case, we just want a function that applies the same model to different datasets. Finally, that `ldply` only needs two arguments: because `lm_models` is already a list, we don't need to do any splitting.
+
 ### Merging two datasets
 
 From the moment a `data.frame` is an object, we can hold as many as our computer allows. And we can put them together and merge
-them. 
+them by specifying the keys that they have in common. Consider a trivial example in which we want to take our original dataset and merge into it the vector of means by state that we calculated above[^1]
+
+[^1]: Yes, we trying to accomplish the same thing we did in the `mutate` call.
 
 ```{r}
 merged_tobacco <- merge(tobacco, group_means, by="state")
 head(merged_tobacco)
 ```
+
+The `merge` function takes some other arguments to specify different classes of joins, what to do with the units that don't match, or what to do with duplicated variables. 
 
 ### Reshaping a dataset
 
