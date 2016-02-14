@@ -45,7 +45,7 @@ Several things are worth noting. First, that we are first transforming a `data.f
 ### Merging two datasets
 
 From the moment a `data.frame` is an object, we can hold as many as our computer allows. And we can put them together and merge
-them by specifying the keys that they have in common. Consider a trivial example in which we want to take our original dataset and merge into it the vector of means by state that we calculated above[^1]
+them by specifying the keys that they have in common. Consider a trivial example in which we want to take our original dataset and merge into it the vector of means by state that we calculated above.[^1]
 
 [^1]: Yes, we trying to accomplish the same thing we did in the `mutate` call.
 
@@ -58,10 +58,15 @@ The `merge` function takes some other arguments to specify different classes of 
 
 ### Reshaping a dataset
 
-We can change the structure and reshape the data.
+We can change the structure and reshape our dataset so that rather than having state-year observations, each row represents data across years. Again, there is a very direct way to do it with base R, but I like the way the `reshape2` package works. Operations are split into two separate functions. The first one "melts" the dataset according to some indexing variables. The second one "casts" the data into a particular shape using a formula interface. The functions are very aptly named `melt` and `dcast`:
 
 ```{r}
 library(reshape2)
 molten_tobacco <- melt(tobacco[, c("state", "year", "tax")], id=c("state", "year"))
 head(dcast(molten_tobacco, state ~ variable + year))
 ```
+
+We don't always need to perform the two steps and if you look at the output of `molten_tobacco` you will realize that it is not doing much for us other than adding a factor that holds the variable _not_ indicated in the `id` argument, and putting its values in a separate column.[^2]
+
+[^2]: We could have omitted the first step and run `dcast(tobacco[, c("state", "year", "tax")], state ~  year)`.
+
