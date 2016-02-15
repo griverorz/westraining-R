@@ -1,0 +1,43 @@
+
+We saw in the previous script the somewhat mysterious function `qt`. It actually belongs to a very rich family of functions that are associated with probability distributions with a common name structure. In general `r` indicate random generation, `d` density function, `q` quantile function, and `p` distribution function. Then, `rnorm` will make an extration out of a normal distribution, `pnorm` will give the probability associated with a quantile in a normal distribution and so on. R provides many distributions, Student's t, Snedecor's F, Gamma, Beta, ... and they all follow the same convention. Thus, `qt` in the previous calculates the probability associated with a quantile in a t distribution with given dof. These functions are very useful. Let's see them in action:
+
+```{r eval=FALSE}
+rnorm(1)
+qnorm(0.975, mean=1, sd=1)
+rnorm(5, mean=2, sd=5)
+rbeta(1, 1, 5)
+```
+
+```{r include=FALSE}
+x1 <- rnorm(5, 14.2, 3.5)
+x2 <- rnorm(5, 10.2, 4.5)
+```
+
+
+```{r}
+x1; x2
+```
+
+```{r}
+t.test(x1, x2)
+
+```
+
+
+
+```{r}
+affairs <- read.csv("http://koaning.io/theme/data/affairs.csv")
+sample_model <- lm(nbaffairs ~ age, data=affairs)
+```
+
+```{r}
+head(predict(sample_model))
+```
+
+```{r}
+head(cbind(1, affairs$age) %*% coef(sample_model))
+```
+
+```{r}
+rnorm(coef(sample_model)[[1]])
+```
