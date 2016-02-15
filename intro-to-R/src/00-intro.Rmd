@@ -2,7 +2,9 @@
 title: "Overview"
 author: "Gonzalo Rivero"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-output:	github_document
+output: 
+  github_document:
+    html_preview: false
 ---
 
 **Why R?**
