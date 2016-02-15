@@ -1,8 +1,8 @@
 --- 
 title: "Data manipulation and I/O"
 author: "Gonzalo Rivero"
-date: "February, 10, 2016"
-output:	html_document
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:	github_document
 ---
 
 ### Data structures (cont.)
