@@ -71,7 +71,8 @@ We can write our dataset to disk in comma-separated format using the `write.csv`
 write.csv(states, file="states.csv")
 ```
 
-Note the named argument to indicate the filename. We could have specified any other folder/directory by passing a path.
+Note the named argument to indicate the filename. We could have specified any
+other folder/directory by passing a path.
 
 Unsurprisingly, we can read our dataset back using `read.csv`.
 ```{r eval=FALSE}
