@@ -1,9 +1,9 @@
 <img style="float: right;" src="logo.png"> 
 
-# Training materials for the R classes at Westat
+# Materials for the R classes 
 
 This repository contains most of the materials used in the introductory and
-advanced classes to R at Westat. 
+advanced classes to R at [Westat](https://www.westat.com/). 
 
 The scripts are provided in Rmarkdown with an HTML output. The scripts are
 grouped by topic and do not correspond to individual classes.
