@@ -95,7 +95,7 @@ reproducibility and it is very easy to share.
 
 For instance, 
 
-<p align="center">
+<p align="left">
 <img src ="assets/raw-rmarkdown.png">
 </p>
 
