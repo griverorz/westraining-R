@@ -89,13 +89,13 @@ media and search engines, anyone?).
 I have prepared these materials using using
 [Rmarkdown](http://rmarkdown.rstudio.com/), a format that makes it easy to
 create dynamic documents. The text is written in markdown, the easiest possible
-markup language ("easy-to-read, easy-to-write"): `_italic_`, `**bold**`, `code`,
+markup language ("easy-to-read, easy-to-write"): `_italic_`, `**bold**`,
 ... but it also allows to include chunks of executable R code. It simplifies
 reproducibility and it is very easy to share.
 
 For instance, 
 
-<p align="right">
+<p align="center">
 <img src ="assets/raw-rmarkdown.png">
 </p>
 
