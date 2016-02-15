@@ -7,21 +7,20 @@ output: html_document
 
 ### The interpreter
 
-Let's start using the interpreter and get used to the basic arithmetic operations. They all work the way you expect to. 
+Let's start using the interpreter to get used to the basic arithmetic operations. They all work the way you expect to. 
 
 ```{r eval=FALSE}
 1 + 1
 sqrt(2)
 exp(1)
 2^3
-0 == log(1)
 ```
 
 The same happens with comparisons:
 
 ```{r eval=FALSE}
 1 > 1
-1 >= 1
+0 == log(1)
 (1 + 1 == 2) | (1 + 1 == 3)
 (1 + 1 == 2) & (1 + 1 == 3)
 ```
@@ -35,7 +34,7 @@ a
 
 ### Data types
 
-R offers a wide variety of data types. The most relevant ones are: _numeric_, _integer_, _character_, and _logical_.
+R offers a variety of data types. The most relevant ones are: _numeric_, _integer_, _character_, and _logical_.
 
 ```{r eval=FALSE}
 1.0 # Numeric
@@ -62,24 +61,28 @@ is.character("ab")
 is.logical(FALSE)
 ```
 
-A common mistake that we all make at some point (but hopefully you will not!) is to test whether an object is `NA` by using the `==` comparison:
+A common mistake that we all make at some point (but hopefully you will not!) is to test whether an object is `NA` by using the `==` comparison.
 ```{r}
 NA == NA
 ```
 
-There are good reasons for these "odd" behavior: `NA` is not an assigned value. We have special functions to check whether an object is `NA`:
+There are good reasons for these "odd" behavior. I like this explanation from [StackOverflow](http://stackoverflow.com/questions/25100974/na-matches-na-but-is-not-equal-to-na-why):
+
+
+> Think of NA as meaning "I don't know what's there". The correct answer to 3 > NA is obviously NA because we don't know if the missing value is larger than 3 or not. Well, it's the same for NA == NA. They are both missing values but the true values could be quite different, so the correct answer is "I don't know."
+
+We have special functions to check whether an object is `NA`:
 
 ```{r}
 is.na(NA)
 ```
 and the same applies for `NaN`.
 
-Note that `is.numeric` is a _function,_ and all functions work the same way in R. They have a name followed by the argument(s) enclosed in parenthesis: `any_function(x)`
+Note that `is.numeric` is a _function,_ and all functions work the same way in R. They have a name followed by the argument(s) enclosed in parenthesis: `any_function(x)`. We will see a lot more about them in the following sessions.
 
 ### Data structures
 
-
-The most common (and intuitive) data structures are `vector`, `matrix`, `data.frame` and `list`.
+The most common (and intuitive) data structures are `vector`, `matrix`, `data.frame` and `list`. We will see `data.frame` in the next script.
 
 A `vector` holds data of the same type (or `NA`). Vectors can be created with the function `c`, which stands for "concatenate".
 
@@ -117,12 +120,20 @@ A %*% B
 ```
 
 See how the first operation is element-wise, while the second is the standard matrix multiplication. We also have common operations like extracting the diagonar (which is a `vector`) or calculating the transpose or the inverse:
-
+	
 ```{r eval=FALSE}
 t(A)
 diag(A)
 solve(A) # but A^-1
 ```
+
+A `list` is an ordered collection of objects, possibly of different types. 
+
+```{r eval=FALSE}
+list("first"=c(1, 2, 3), "second"=c("a", "b"), "third"=matrix(NA, ncol=2, nrow=2))
+```
+
+Lists play a very important role in R, as we will see later on.
 
 ### Indexing
 
@@ -136,12 +147,24 @@ a[-3]
 a[1] <- 0
 ```
 
-A matrix is two dimensional, so we need to elements:
+A matrix is two dimensional, so we need two elements to indicate cells in our structure but it works using the same principles:
 ```{r eval=FALSE}
 A <- matrix(c(1, 2, 3, 4), nrow=2)
 A[1, 1]
-A[1, ]
+A[1, ] # Empty space is short for "everything in this dimension"
 A[, 1]
 A[2, 2] <- 0
 A[2, ] <- 0 # Recycling rule
 ```
+
+A list uses a similar notation, but with two brackets instead of one. There are other ways to access elements.
+
+```{r}
+my_list <- list("a"=1, "b"=2, "c"=NA)
+my_list[["a"]] # Name
+my_list[[1]] # Position
+my_list$a <- c("Not 1 anymore")
+```
+
+Notice how we can access elements by name or position.
+

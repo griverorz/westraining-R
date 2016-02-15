@@ -7,18 +7,19 @@ output:	html_document
 
 **Why R?**
 
-- Open source and extensible. It is free of charge. You (and the community) can
-  inspect the code for any function. 
-- Very popular _programing language_ for statistics. "It promotes experimentation
-  and exploration, which improves data analysis." Lots of libraries for all
-  kinds of specialized tasks.
+- Open source and extensible. It is also free of charge. More importantly, you (and the community)
+  can inspect the code for any function.
+- Very popular _programing language_ for statistics. "It promotes
+  experimentation and exploration, which improves data analysis." Lots of
+  libraries for all kinds of specialized tasks.
 - Great for visualization. Excellent packages for graphics.
-- Excellent documentation and online help. 
+- Excellent documentation and online help.
 - A very active and helpful community.
 
 **What is R anyway?**
 
-It is a programing language:
+If you are coming from SAS or Stata, you are better of thinking about it as a programming language and not as a
+statistical environment:
 - Interpreted: allows direct executions of code, which makes it slower than
   compiled languages.
 - Dynamically typed: Easy and less boiler plate, makes metaprogramming a lot easier. 
@@ -34,13 +35,15 @@ It is possible to use R with other IDE and text editors:
 
 - `emacs` through [ESS](http://ess.r-project.org/) (what I use).
 - `vim` with the [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628).
-- Sublime Text
+- Sublime Text.
 
 **A few useful resources**
 
-There is a growing collection of materials available offline and online to learn
-R. The [Journal of Statistical Software](http://www.jstatsoft.org/index) and the [Use R!](http://www.springer.com/series/6991) series from Springer
-regularly publish applications of R to different domains. 
+There is a constantly growing collection of materials available offline and
+online to learn R. The
+[Journal of Statistical Software](http://www.jstatsoft.org/index) and the
+[Use R!](http://www.springer.com/series/6991) series from Springer regularly
+publish applications of R to different domains.
 
 The [R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) is a bit outdated but still contains a good collection of
 trouble spots, oddities, traps, glitches in R. 
@@ -49,7 +52,11 @@ SAS users may find useful
 [R for SAS and SPSS users](http://www.springer.com/us/book/9781461406846),
 although I have never used it myself (I don't know SAS).
 
-Official documentation in the CRAN (The Comprehensive R Archive Network). 
+For the analysis of compley survey data, you may want to take a look to ["Complex
+Surveys. A Guide to Analysis Using R"](http://r-survey.r-forge.r-project.org/svybook/). 
+
+The official documentation in CRAN (The Comprehensive R Archive Network) is
+simply excellent but it goes well beyond the scope of this class.
 
 **Looking around**
 
@@ -71,13 +78,28 @@ of usage, we would type:
 ```
 
 The R community is very helpful and active. If you ever get stuck in a problem, the best solution is to ask in 
-[StackOverflow](http://stackoverflow.com/), a very large community of programmers using the `#r` tag. In social media and other fori, the language is typically referred to as `#rstats` for obvious reasons.
+[StackOverflow](http://stackoverflow.com/), a very large community of
+programmers using the `#r` tag. 
+
+For obvious reasons, the language is sometimes referred to as "Rstats" (social
+media and search engines, anyone?).
 
 **About this document**
 
-I have prepared these materials using using [Rmarkdown](http://rmarkdown.rstudio.com/), a format that makes easy to create dynamic documents. The text is written in markdown, the easiest possible markup language ("easy-to-read, easy-to-write"): `_italic_`, `**bold**`, `code`, ... but it also allows to include chunks of executable R code. It simplifies reproducibility and it is very easy to share. 
+I have prepared these materials using using
+[Rmarkdown](http://rmarkdown.rstudio.com/), a format that makes it easy to
+create dynamic documents. The text is written in markdown, the easiest possible
+markup language ("easy-to-read, easy-to-write"): `_italic_`, `**bold**`,
+... but it also allows to include chunks of executable R code. It simplifies
+reproducibility and it is very easy to share.
 
-For instance:
+For instance, 
+
+<p align="left">
+<img src ="assets/raw-rmarkdown.png">
+</p>
+
+is rendered as:
 
 ```{r}
 N <- 10
@@ -86,4 +108,5 @@ b <- a + rnorm(N)
 plot(a, b); title("An ugly plot")
 ```
 
-All the Code kept in Github. 
+GitHub and `git` more generally deserve a class on its own, but here it will
+only be used to host the code.
