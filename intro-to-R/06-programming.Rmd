@@ -2,8 +2,12 @@
 title: "The very basics of programming"
 author: "Gonzalo Rivero"
 date: "February, 12, 2016"
-output:	md_document
+output:	github_document
 ---
+
+```{r setup, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(fig.path = './assets/')
+```
 
 One of the very nice features of R when one comes from other statistical software like SAS or Stata is that it is very easy to program. And that is a really good thing, because the manipulation, analysis, and visualization of data is considerably easier when one can write small functions. In addition, because R is open-source, you can inspect what every function does, so it is useful to get a sense of the most basic elements of programming to be able to take advantage of that feature.
 

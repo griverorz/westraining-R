@@ -2,7 +2,7 @@
 title: "Descriptives and simple statistics"
 author: "Gonzalo Rivero"
 date: "January, 31, 2016"
-output:	html_document
+output:	github_document
 extension: footnotes
 ---
 
