@@ -92,15 +92,38 @@ Let's take a deeper look into the formula interface and the structure of objects
 
 ## The formula interface 
 
-Consider the case in which we can to now run a regression on the number of affairs using information about. Do not much attention to the theortical soundness of the analysis.
+Consider the case in which we can to now run a regression on the number of affairs using information about. Do not much attention to the theortical soundness of the analysis:
 
 ```{r}
 sample_model <- lm(nbaffairs ~ I(age - 18)*child + factor(religious), data=affairs)
+```
+
+We can see here the elegance of the formula interface. The model is doing several things. First, we are recentering age so that 18 is the new 0 value. It is important that the expression is wrapped in the `I()` function to ensure that the `-` inside is taken as an arithmetical operator and not as a formula operator. Then,  multiply that new variable by the variable `child` which is a factor, which uses `yes` as the reference level in the dummy expansion. Not only that, the `*` operator creates the full interaction including the main effects. Finally, although `religious` is an numerical variable, we pass it through `factor` to cast it into a categorical with $n - 1$ dummies. As we can see, the formula takes care of a lot of the transformations and lets us express the structure of the model very succintly. 
+
+Printing the object gets us the coefficients
+```{r}
 sample_model
 ```
 
-Notice that `religious` was a numeric variable, that we now casted into categorical (dummy - 1)[^1]
+but the `summary` function applied to it gives us a lot more information:
+```{r}
+summary_model <- summary(sample_model)
+summary_model
+```
 
-We could have 
+### The shortest introduction to objects and methods
 
-## Accessors
+This is one of the beauties of R as an statistical language. The object `summary_model` now holds all the information about the model. We could for instance retrieve the coefficients and the covariace matrix to get the normal-based confidence intervals:
+
+```{r}
+coefficients(sample_model) + qt(0.975, df=sample_model$df.residual)*sqrt(diag(vcov(sample_model)))
+```
+
+and check that the result matches the outcome of the built-in function:
+```{r}
+confint(sample_model)
+```
+
+The two lines previous illustrate the way R works. `sample_model` is an object that contains a number of _attributes_ like the coefficients or the residual degrees-of-freedom that were obtained when we fit the model. We access these attributes either through functions like `coefficients` or through the `$` operator, because `sample_model` is still a list. 
+
+On the other hand, we can make operations over the elements in `sample_model`. Moreover, these function will know that they are being applied to the outcome of a linear model. In this case, `sample_model` does not contain the confidence interval (why should it?), but `confint` knows where to look for the information it needs in the object. `confint` is therefore a _method_.

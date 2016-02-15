@@ -128,4 +128,3 @@ and use it to illustrate what happens when you are not careful:
 my_sign("A cow")
 ```
 
-### All together
