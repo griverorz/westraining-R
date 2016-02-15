@@ -1,4 +1,4 @@
-<img style="float: right;" src="logo.png"> 
+<div style="text-align:right"><img src ="logo.png" /></div>
 
 # Materials for the R classes 
 
