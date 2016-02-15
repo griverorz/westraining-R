@@ -1,5 +1,47 @@
+---
+title: "Inference, probability and simulation"
+author: "Gonzalo Rivero"
+date: "February, 11, 2016"
+output: html_document
+---
 
-We saw in the previous script the somewhat mysterious function `qt`. It actually belongs to a very rich family of functions that are associated with probability distributions with a common name structure. In general `r` indicate random generation, `d` density function, `q` quantile function, and `p` distribution function. Then, `rnorm` will make an extration out of a normal distribution, `pnorm` will give the probability associated with a quantile in a normal distribution and so on. R provides many distributions, Student's t, Snedecor's F, Gamma, Beta, ... and they all follow the same convention. Thus, `qt` in the previous calculates the probability associated with a quantile in a t distribution with given dof. These functions are very useful. Let's see them in action:
+### Inference
+
+Let's take a more careful look at the model we fit before:
+
+```{r}
+affairs <- read.csv("http://koaning.io/theme/data/affairs.csv")
+sample_model <- lm(nbaffairs ~ age, data=affairs)
+```
+
+We took a look at some values of interest, like the estimated coefficients or the confidence intervals around them. It may also be interesting to take a look at predictions. 
+
+```{r}
+yhat <- predict(sample_model)
+head(yhat)
+```
+The `predict` method takes a number of uselful arguments, like `newdata`, which applies the estimated coefficients to a new dataset. 
+
+```{r}
+predict(sample_model, newdata=data.frame("age"=54), interval="confidence")
+``` 
+
+### Simulation and probability
+We saw in the previous script the somewhat mysterious function `qt`. It actually
+belongs to a very rich family of functions that are associated with probability
+distributions with a common name structure. 
+
+The first letter indicates the operation, while the rest of the name indicates
+the distribution. In particular, `r` indicate random generation, `d` density
+function, `q` quantile function, and `p` distribution function. Therefore, `rnorm`
+will make an extration out of a normal distribution, `pnorm` will give the
+probability associated with a quantile in a normal distribution and so on. R
+provides many distributions, Student's t, Snedecor's F, Gamma, Beta, ... and
+they all follow the same convention.
+
+Thus, `qt` in the previous calculates the probability associated with a quantile
+in a t distribution with given dof. These functions are very useful. Let's see
+them in action:
 
 ```{r eval=FALSE}
 rnorm(1)
@@ -7,37 +49,19 @@ qnorm(0.975, mean=1, sd=1)
 rnorm(5, mean=2, sd=5)
 rbeta(1, 1, 5)
 ```
+For simulations it is probably a good idea to set up a seed for the RNG.
 
-```{r include=FALSE}
-x1 <- rnorm(5, 14.2, 3.5)
-x2 <- rnorm(5, 10.2, 4.5)
+```{r eval=FALSE}
+set.seed(20150211)
+rnorm(1, 2, 1)
+set.seed(20150211)
+rnorm(1, 2, 1) 
 ```
 
+The function `replicate` let's us repeat expressions a number of times:
 
 ```{r}
-x1; x2
-```
-
-```{r}
-t.test(x1, x2)
-
-```
-
-
-
-```{r}
-affairs <- read.csv("http://koaning.io/theme/data/affairs.csv")
-sample_model <- lm(nbaffairs ~ age, data=affairs)
-```
-
-```{r}
-head(predict(sample_model))
-```
-
-```{r}
-head(cbind(1, affairs$age) %*% coef(sample_model))
-```
-
-```{r}
-rnorm(coef(sample_model)[[1]])
+x <- rnorm(25, 3.2, 1.7)
+summary(lm(x ~ 1))
+sd(replicate(9999, mean(sample(x, length(x), replace=TRUE))))
 ```
