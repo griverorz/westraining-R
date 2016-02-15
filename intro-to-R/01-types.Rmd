@@ -7,21 +7,20 @@ output: html_document
 
 ### The interpreter
 
-Let's start using the interpreter and get used to the basic arithmetic operations. They all work the way you expect to. 
+Let's start using the interpreter to get used to the basic arithmetic operations. They all work the way you expect to. 
 
 ```{r eval=FALSE}
 1 + 1
 sqrt(2)
 exp(1)
 2^3
-0 == log(1)
 ```
 
 The same happens with comparisons:
 
 ```{r eval=FALSE}
 1 > 1
-1 >= 1
+0 == log(1)
 (1 + 1 == 2) | (1 + 1 == 3)
 (1 + 1 == 2) & (1 + 1 == 3)
 ```
@@ -35,7 +34,7 @@ a
 
 ### Data types
 
-R offers a wide variety of data types. The most relevant ones are: _numeric_, _integer_, _character_, and _logical_.
+R offers a variety of data types. The most relevant ones are: _numeric_, _integer_, _character_, and _logical_.
 
 ```{r eval=FALSE}
 1.0 # Numeric
@@ -62,12 +61,17 @@ is.character("ab")
 is.logical(FALSE)
 ```
 
-A common mistake that we all make at some point (but hopefully you will not!) is to test whether an object is `NA` by using the `==` comparison:
+A common mistake that we all make at some point (but hopefully you will not!) is to test whether an object is `NA` by using the `==` comparison.
 ```{r}
 NA == NA
 ```
 
-There are good reasons for these "odd" behavior: `NA` is not an assigned value. We have special functions to check whether an object is `NA`:
+There are good reasons for these "odd" behavior. I like this explanation from [StackOverflow](http://stackoverflow.com/questions/25100974/na-matches-na-but-is-not-equal-to-na-why):
+
+
+> Think of NA as meaning "I don't know what's there". The correct answer to 3 > NA is obviously NA because we don't know if the missing value is larger than 3 or not. Well, it's the same for NA == NA. They are both missing values but the true values could be quite different, so the correct answer is "I don't know."
+
+We have special functions to check whether an object is `NA`:
 
 ```{r}
 is.na(NA)
@@ -77,7 +81,6 @@ and the same applies for `NaN`.
 Note that `is.numeric` is a _function,_ and all functions work the same way in R. They have a name followed by the argument(s) enclosed in parenthesis: `any_function(x)`. We will see a lot more about them in the following sessions.
 
 ### Data structures
-
 
 The most common (and intuitive) data structures are `vector`, `matrix`, `data.frame` and `list`. We will see `data.frame` in the next script.
 
