@@ -1,6 +1,6 @@
 Overview
 ================
-February 15, 2016
+February 16, 2016
 
 **Why R?**
 
@@ -28,7 +28,7 @@ R can be downloaded from the Comprehensive R Archive Network, [CRAN](https//cran
 
 There is a constantly growing collection of materials available offline and online to learn R. The [Journal of Statistical Software](http://www.jstatsoft.org/index) and the [Use R!](http://www.springer.com/series/6991) series from Springer regularly publish applications of R to different domains.
 
-The [R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) is a bit outdated but still contains a good collection of trouble spots, oddities, traps, glitches in R.
+A good overview for beginners is [Learning R](http://shop.oreilly.com/product/0636920028352.do).
 
 SAS users may find useful [R for SAS and SPSS users](http://www.springer.com/us/book/9781461406846), although I have never used it myself (I don't know SAS).
 

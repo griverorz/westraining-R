@@ -1,17 +1,10 @@
 Data manipulation and I/O
 ================
-February 15, 2016
+February 16, 2016
 
 ### Data structures (cont.)
 
 `data.frame` is the building block for most of what we will do in data analysis. Think about them as a `matrix` that can hold columns of different types and with column names.
-
-``` r
-states <- data.frame("code"       = c("CA", "NY", "NE", "AZ"), 
-                     "population" = c(38.8, 19.7, 2.1, 6.8), 
-                     "region"     = c("West", "Northeast", "Midwest", "West"), 
-                     "landlock"   = c(FALSE, FALSE, TRUE, TRUE))
-```
 
 We can access elements via indexing the same way as we would do in a `matrix` or we can access by name:
 
@@ -23,24 +16,11 @@ states$region
 
 We can also add new variables:
 
-``` r
-states$spanish <- c(28.5, 15.7, NA, 19.5)
-```
-
 We can edit values putting together a few things that we have seen so far:
-
-``` r
-states$population[states$code == "NE"] <- 1.8
-```
 
 Carefully examine what's happening in the previous line. `states$code` gets the column `code` in our dataset. `states$code == "NE"` returns a logical vector in which only the third observation will be `TRUE`. `states$population[states$code == "NE"]` access the `population` value for Nebraska. And then we assign the correct value 1.8 to it.
 
 The same approach can be used for subsetting a dataset:
-
-``` r
-states[states$population > 10,] # Notice the comma!
-subset(states, population > 10)
-```
 
 Transformation of variables is straightforward:
 
@@ -55,8 +35,16 @@ The dataset is also useful to think about variable types. Consider the variable 
 ``` r
 states$region <- factor(states$region)
 states$region
+```
+
+    ## [1] West      Northeast Midwest   West     
+    ## Levels: Midwest Northeast West
+
+``` r
 levels(states$region)
 ```
+
+    ## [1] "Midwest"   "Northeast" "West"
 
 Depending on who you talk to, they may hate them or love them.
 

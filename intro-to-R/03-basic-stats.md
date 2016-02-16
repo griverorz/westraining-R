@@ -1,6 +1,6 @@
 Descriptives and simple statistics
 ================
-February 15, 2016
+February 16, 2016
 
 Let's start by reading in some data from the Internet.
 
