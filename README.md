@@ -5,9 +5,9 @@
 # Materials for the R classes 
 
 This repository contains most of the materials used in the introductory and
-advanced classes to R for at [Westat](https://www.westat.com/). 
+advanced classes to R at [Westat](https://www.westat.com/). 
 
-The scripts are provided in Rmarkdown with an HTML output. The scripts are
+The scripts are provided in Rmarkdown with a markdown output. The scripts are
 grouped by topic and do not correspond to individual classes.
 
 ## Introduction to R 
