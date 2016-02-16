@@ -10,7 +10,7 @@
    modulus operator. Think about 3 mod 2 vs. 4 mod 2.
    c. Create a sequence of
    multiples of 3 and a sequence of multiples of 7 up to 49 and return the
-   number of elements in the intersection.
+   number of elements in the intersection. 
 
 2. We will see how to perform data analysis in R, but it is probably a good idea
 	to take a look at how to run a simple model manually:
@@ -28,7 +28,7 @@
 		2.5
 	```
 
-	where "na" stands for a missing value. Be careful with the dimensions of y.
+	where "na" stands for a missing value. Be careful with the dimensions of `y`.
 	b. Impute the missing value in `X` with the column mean. 
 	c. Calculate the OLS estimator of `beta` for the linear model of y over X in
 	matrix form. Take a look at the `crossprod` function.
