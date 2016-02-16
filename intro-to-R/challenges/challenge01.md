@@ -15,27 +15,24 @@
 2. We will see how to perform data analysis in R, but it is probably a good idea
 	to take a look at how to run a simple model manually:
 	a. Input the following matrices into R:
-$$
-X=\\left(
-\\begin{array}{cc}
-2.1 & -0.3 \\\\
-3.2 &  \text{na}  \\\\
-4.7 & -2.9	\\\\
-\\end{array}
-\\right),\quad
-y=\\left(\\begin{array}{c}
-1.1 \\\\
-1.6 \\\\
-2.5 \\\\
-\\end{array}\\right)
-$$
-	where "na" stands for a missing value. Be careful with the dimensions of y.
-	b. Impute the missing value in $X$ with the column mean. 
-	c. Calculate the OLS estimator of $\beta$ for the model $y = \beta X + \varepsilon$
-	in matrix form. Remember that the OLS estimator is:
-	$$\hat \beta = (X^{T}X)^{-1}X^{T}y$$
-	Take a look at the `crossprod` function.
 
+	``` r
+		2.1 -0.3
+	X = 3.2  na
+		4.7 -2.9
+	```
+
+	``` r
+		1.1
+	y = 1.6
+		2.5
+	```
+
+	where "na" stands for a missing value. Be careful with the dimensions of y.
+	b. Impute the missing value in `X` with the column mean. 
+	c. Calculate the OLS estimator of `beta` for the linear model of y over X in
+	matrix form. Take a look at the `crossprod` function.
+	
 3. Load the Iris dataset into R using `data(iris)`.
    a. Get the proportion of observations of each species.
    b. Calculate the mean and standard deviation of the length of the petal for
