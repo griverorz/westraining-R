@@ -35,4 +35,10 @@ $$
 	in matrix form. Remember that the OLS estimator is:
 	$$\hat \beta = (X^{T}X)^{-1}X^{T}y$$
 	Take a look at the `crossprod` function.
-	
+
+3. Load the Iris dataset into R using `data(iris)`.
+   a. Get the proportion of observations of each species.
+   b. Calculate the mean and standard deviation of the length of the petal for
+   each species.
+   c. Calculate correlation matrix of the numerical variables. Take a look at
+   the function `corr`.
