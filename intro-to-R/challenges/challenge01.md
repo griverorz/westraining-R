@@ -14,22 +14,22 @@
 
 2. We will see how to perform data analysis in R, but it is probably a good idea
 	to take a look at how to run a simple model manually:
-	a. Input the following matrices into R:
+	a. Input the following matrices into R, where "na" stands for a missing value. Be careful with the dimensions of `y`.
 
-	``` r
-		2.1 -0.3
-	X = 3.2  na
-		4.7 -2.9
-	```
+	 	``` r
+	 		2.1 -0.3
+	 	X = 3.2  na
+	 		4.7 -2.9
+	 	```
+	 
+	 	``` r
+	 		1.1
+	 	y = 1.6
+	 		2.5
+	 	```
 
-	``` r
-		1.1
-	y = 1.6
-		2.5
-	```
-
-	where "na" stands for a missing value. Be careful with the dimensions of `y`.
-	b. Impute the missing value in `X` with the column mean. 
+	b. Impute the missing value in `X` with the column mean.
+	
 	c. Calculate the OLS estimator of `beta` for the linear model of `y` on `X` in
 	matrix form. Take a look at the `crossprod` function.
 	
