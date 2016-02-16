@@ -1,6 +1,5 @@
 --- 
 title: "Data manipulation and I/O"
-author: "Gonzalo Rivero"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   github_document:
