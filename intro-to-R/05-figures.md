@@ -34,7 +34,7 @@ p <- ggplot(tobacco, aes(x=tax))
 p + geom_density()
 ```
 
-![](../assets/unnamed-chunk-4-1.png)<!-- -->
+![](./assets/unnamed-chunk-4-1.png)<!-- -->
 
 Getting the density per year is easy: we declare that data is grouped by year and that the data corresponding to each year will receive a different color. In addition, we add labels and a title (because we love good practices):
 
@@ -44,7 +44,7 @@ p + geom_density() +
     labs(title="Something", x="Age", y="Count")
 ```
 
-![](../assets/unnamed-chunk-5-1.png)<!-- -->
+![](./assets/unnamed-chunk-5-1.png)<!-- -->
 
 A scatterplot is defined by two dimensions, but the structure remains the same:
 
@@ -54,7 +54,7 @@ p + geom_point() +
     labs(title="Something", x="Age", y="Count")
 ```
 
-![](../assets/unnamed-chunk-6-1.png)<!-- -->
+![](./assets/unnamed-chunk-6-1.png)<!-- -->
 
 One of the things that I really like about ggplot is how easy it is to overlay exploratory models on top of our data. In this case, we want to add a line that follows a semi-log linear model between the two variables.
 
@@ -65,7 +65,7 @@ p + geom_point() +
     geom_line(stat="smooth", formula= y ~ log(x), method="lm")
 ```
 
-![](../assets/unnamed-chunk-7-1.png)<!-- -->
+![](./assets/unnamed-chunk-7-1.png)<!-- -->
 
 Given the data structure, it seems reasonable to add a different regression line per state. The only thing that we have to do here is to indicate that our data is grouped by that variable. We don't need to create the regression for each state or anything like that. The rest of the changes are mostly to make it look slightly prettier.
 
@@ -78,7 +78,7 @@ p + labs(title="Consumption and tax", x="Tax rate", y="Consumption") +
     theme(legend.position="none")
 ```
 
-![](../assets/unnamed-chunk-8-1.png)<!-- -->
+![](./assets/unnamed-chunk-8-1.png)<!-- -->
 
 The feature sold me to `ggplot2` is that makes it very easy to get conditional plots. Let's say our hypothesis is that the effect of taxes on consumption changes by the income level. In particular, the reaction in poor and rich states is different. We first need to create a new variable that indicates whether one state (not a state-year observation) is above the median. To make things simple, we will consider the average income of the state during the period.
 
@@ -97,7 +97,7 @@ p + labs(title="Consumption and tax", x="Tax rate", y="Consumption") +
     facet_wrap(~ rich) # This is the relevant piece
 ```
 
-![](../assets/unnamed-chunk-9-1.png)<!-- -->
+![](./assets/unnamed-chunk-9-1.png)<!-- -->
 
 How to save a figure? The easiest way is probably to use the `ggsave` wrapper:
 
