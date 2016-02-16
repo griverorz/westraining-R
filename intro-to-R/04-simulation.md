@@ -66,17 +66,17 @@ summary(lm(x ~ 1))
     ## lm(formula = x ~ 1)
     ## 
     ## Residuals:
-    ##    Min     1Q Median     3Q    Max 
-    ## -3.884 -0.817  0.373  1.032  3.199 
+    ##     Min      1Q  Median      3Q     Max 
+    ## -2.0663 -0.5488  0.0167  0.3609  2.7888 
     ## 
     ## Coefficients:
     ##             Estimate Std. Error t value Pr(>|t|)
-    ## (Intercept)    2.284      0.327    6.99  3.1e-07
+    ## (Intercept)    3.665      0.237    15.5  5.5e-14
     ## 
-    ## Residual standard error: 1.63 on 24 degrees of freedom
+    ## Residual standard error: 1.18 on 24 degrees of freedom
 
 ``` r
 sd(replicate(9999, mean(sample(x, length(x), replace=TRUE))))
 ```
 
-    ## [1] 0.322
+    ## [1] 0.229

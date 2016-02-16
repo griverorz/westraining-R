@@ -12,7 +12,13 @@ February 16, 2016
 
 **What is R anyway?**
 
-If you are coming from SAS or Stata, you are better of thinking about it as a programming language and not as a statistical environment: - Interpreted: allows direct executions of code, which makes it slower than compiled languages. - Dynamically typed: Easy and less boiler plate, makes metaprogramming a lot easier. - Multi-paradigm. Although most users exploit object orientation.
+If you are coming from SAS or Stata, you are better of thinking about it as a programming language and not as a statistical environment:
+
+-   Interpreted: allows direct executions of code, which makes it slower than compiled languages.
+
+-   Dynamically typed: Easy and less boiler plate, makes metaprogramming a lot easier.
+
+-   Multi-paradigm. Although most users exploit object orientation.
 
 The extension of the R files is usually `.R`
 
