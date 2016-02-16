@@ -165,7 +165,7 @@ A[2, ] <- 0 # Recycling rule
 
 A list uses a similar notation, but with two brackets instead of one. There are other ways to access elements.
 
-```{r}
+```{r eval=FALSE}
 my_list <- list("a"=1, "b"=2, "c"=NA)
 my_list[["a"]] # Name
 my_list[[1]] # Position

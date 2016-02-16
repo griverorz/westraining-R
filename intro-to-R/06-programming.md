@@ -25,7 +25,7 @@ my_mean
 ```
 
     ## function(x) sum(x)/length(x)
-    ## <environment: 0x7ff2a02b2b20>
+    ## <environment: 0x7fcc304f3a78>
 
 The way we defined the function is perfectly valid but we could also be a bit more explicit by enclosing the statement in parenthesis and ensuring that it is returned.
 
@@ -185,4 +185,4 @@ p + geom_density() +
     stat_function(fun=dbeta, args=list(3, 6), colour="red", linetype=2)
 ```
 
-![](./assets/unnamed-chunk-12-1.png)<!-- -->
+![](./assets/unnamed-chunk-12-1.png)

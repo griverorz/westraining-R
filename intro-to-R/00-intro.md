@@ -76,6 +76,6 @@ b <- a + rnorm(N)
 plot(a, b); title("An ugly plot")
 ```
 
-![](assets/unnamed-chunk-2-1.png)<!-- -->
+![](assets/unnamed-chunk-2-1.png)
 
 GitHub and `git` more generally deserve a class on its own, but here it will only be used to host the code.

@@ -7,6 +7,10 @@ output:
     html_preview: false
 ---
 
+```{r setup, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(fig.path = 'assets/')
+```
+
 **Why R?**
 
 - Open source and extensible. It is also free of charge. More importantly, you (and the community)
@@ -75,7 +79,7 @@ The documentation of R has a well-earned reputation of being excellent. It can
 be accessed through the interpreter. For instance, if we wanted to get
 information about what `lm` does, or what paramaters it takes or some examples
 of usage, we would type:
-```{r}
+```{r eval=FALSE}
 ?lm
 ```
 

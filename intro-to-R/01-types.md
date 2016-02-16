@@ -182,17 +182,7 @@ A list uses a similar notation, but with two brackets instead of one. There are 
 ``` r
 my_list <- list("a"=1, "b"=2, "c"=NA)
 my_list[["a"]] # Name
-```
-
-    ## [1] 1
-
-``` r
 my_list[[1]] # Position
-```
-
-    ## [1] 1
-
-``` r
 my_list$a <- c("Not 1 anymore")
 ```
 
