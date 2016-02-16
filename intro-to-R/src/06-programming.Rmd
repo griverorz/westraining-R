@@ -87,13 +87,14 @@ while (i < 3) {
 The thing to notice is that how in each iteration of the loop, the value of `i` changes: when it takes the value 3, the condition `i < 3` evaluates to FALSE, and the loop stops --and therefore, 3 is not printed to the screen.
 
 There are some cases in which the use of `which` is natural, like when we want to run algorithms until something converges. Take for instance the calculation of Newton-Raphson:
+
 ```{r}
 tol <- 0.01
-x.last <- 10; diff <- 1
+x_last <- 10; diff <- 1
 while (abs(diff) > tol) {
-    x <- x.last - (x.last^2)/(2*x.last)
-    diff <- (x - x.last)
-    x.last <- x
+    x <- x_last - (x_last^2)/(2*x_last)
+    diff <- (x - x_last)
+    x_last <- x
     print(x)
 }
 ```
