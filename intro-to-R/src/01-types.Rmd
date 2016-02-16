@@ -5,6 +5,10 @@ date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: github_document
 ---
 
+```{r setup, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(fig.path = 'assets/')
+```
+
 ### The interpreter
 
 Let's start using the interpreter to get used to the basic arithmetic operations. They all work the way you expect to. 
