@@ -1,6 +1,5 @@
 Data manipulation and I/O
 ================
-Gonzalo Rivero
 February 15, 2016
 
 ### Data structures (cont.)
