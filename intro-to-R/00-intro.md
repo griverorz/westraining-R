@@ -1,6 +1,5 @@
 Overview
 ================
-Gonzalo Rivero
 February 15, 2016
 
 **Why R?**

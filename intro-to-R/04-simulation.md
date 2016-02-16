@@ -1,6 +1,5 @@
 Inference, probability and simulation
 ================
-Gonzalo Rivero
 February 15, 2016
 
 ### Inference
@@ -68,11 +67,11 @@ summary(lm(x ~ 1))
     ## 
     ## Residuals:
     ##    Min     1Q Median     3Q    Max 
-    ## -2.437 -1.746 -0.012  1.026  4.483 
+    ## -3.128 -1.695  0.202  1.453  2.619 
     ## 
     ## Coefficients:
     ##             Estimate Std. Error t value Pr(>|t|)
-    ## (Intercept)    3.401      0.361    9.42  1.5e-09
+    ## (Intercept)     2.90       0.36    8.07  2.7e-08
     ## 
     ## Residual standard error: 1.8 on 24 degrees of freedom
 
@@ -80,4 +79,4 @@ summary(lm(x ~ 1))
 sd(replicate(9999, mean(sample(x, length(x), replace=TRUE))))
 ```
 
-    ## [1] 0.35
+    ## [1] 0.354

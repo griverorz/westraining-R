@@ -1,6 +1,5 @@
 Descriptives and simple statistics
 ================
-Gonzalo Rivero
 February 15, 2016
 
 Let's start by reading in some data from the Internet.

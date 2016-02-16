@@ -1,6 +1,5 @@
 More data manipulation
 ================
-Gonzalo Rivero
 February 15, 2016
 
 R packs a lot of functionality to make data manipulation easier, and it is impossible to even give an overview of the array of tools that are available in this little space. However, the majority of the things I end up doing fall in three categories: apply some function to a grouping of the data, merging separate datasets, or reshaping data. Moreover, I think they summarize nicely they way R works.

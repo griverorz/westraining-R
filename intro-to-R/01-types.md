@@ -1,6 +1,5 @@
 The R building blocks
 ================
-Gonzalo Rivero
 February 15, 2016
 
 ### The interpreter
