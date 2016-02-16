@@ -30,7 +30,7 @@
 
 	where "na" stands for a missing value. Be careful with the dimensions of `y`.
 	b. Impute the missing value in `X` with the column mean. 
-	c. Calculate the OLS estimator of `beta` for the linear model of y over X in
+	c. Calculate the OLS estimator of `beta` for the linear model of `y` on `X` in
 	matrix form. Take a look at the `crossprod` function.
 	
 3. Load the Iris dataset into R using `data(iris)`.
