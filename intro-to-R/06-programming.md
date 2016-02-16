@@ -24,7 +24,7 @@ my_mean
 ```
 
     ## function(x) sum(x)/length(x)
-    ## <environment: 0x7f8c47ddfad0>
+    ## <environment: 0x7fd9cce5f4d0>
 
 The way we defined the function is perfectly valid but we could also be a bit more explicit by enclosing the statement in parenthesis and ensuring that it is returned.
 
@@ -98,11 +98,11 @@ There are some cases in which the use of `which` is natural, like when we want t
 
 ``` r
 tol <- 0.01
-x.last <- 10; diff <- 1
+x_last <- 10; diff <- 1
 while (abs(diff) > tol) {
-    x <- x.last - (x.last^2)/(2*x.last)
-    diff <- (x - x.last)
-    x.last <- x
+    x <- x_last - (x_last^2)/(2*x_last)
+    diff <- (x - x_last)
+    x_last <- x
     print(x)
 }
 ```
