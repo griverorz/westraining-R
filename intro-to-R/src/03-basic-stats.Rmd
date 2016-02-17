@@ -2,20 +2,20 @@
 title: "Descriptives and simple statistics"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
-  github_document:
-    html_preview: false
+  html_document
 extension: footnotes
 ---
 
 ### Moving from the prompt to the script
 
 So far, we have been doing everything through on the interpreter directly. We
-will use the interpreter a lot in all the analysis to test things, but it is
+will use the interpreter a lot during data analysis to test things, but it is
 probably a good idea to keep our code somewhere. Here is when using a tool like
-RStudio start to make a lot of sense: we want something that makes it easy to
+RStudio starst to make sense: we want something that makes it easy to
 edit text files (like navigation tools or syntax highlighting) and also that
-connects to the R interpreter. You will probably run the rest of the sessions by
-typing in the "Code" window and running things from there.
+connects to the R interpreter. 
+
+You will probably run the rest of the sessions by typing in the "Code" window and sending things to the console from there.
 
 ### Basic data analysis
 
@@ -78,7 +78,24 @@ mean(affairs$nbaffairs[affairs$child == "yes"])
 mean(affairs$nbaffairs[affairs$child == "no"])
 ```
 
-A t-test can be performed by using the function `t.test` with the formula interface. Formulas play a huge role in R:
+A t-test can be performed in several ways. The most natural one for new people to R is passing variables. For instance, if we wanted to test one variable against the standard null:
+
+```{r}
+t.test(affairs$nbaffairs)
+```
+
+We can also test equality of two means by passing _two_ vectors to the function:
+```{r}
+t.test(affairs$nbaffairs[affairs$child == "yes"], affairs$nbaffairs[affairs$child == "no"])
+```
+
+The thing to notice here is that the second vector is a second _optional argument_ to the function and, by passing it, the function performs a different routine. Let's take a look at the documentation for `t.test`:
+
+```{r eval=FALSE}
+?t.test
+```
+
+We see that there are two separate _methods_ (more about this in a second) for interacting with `t.test`: the one we just used, passing arguments `x` and maybe `y`, and another one that usesa `formula`. Formulas play a huge role in R:
 
 ```{r}
 my_test <- t.test(nbaffairs ~ child, data=affairs)
@@ -95,11 +112,15 @@ We can inspect the contents of the `my_test` object using the function `str`:
 str(my_test)
 ```
 
-Note that `my_test` is a list that contains all the information pertaining to the t-test we ran. It contains the statistic, the degrees of freedom, the confidence interval, ... and more importantly, we can access all of those elements and use them elsewhere. For instance, we can get the test statistic from the element `statistic`:
+Note that `my_test` is a list that contains all the information pertaining to the t-test we ran. It contains the statistic, the degrees of freedom, the confidence interval, ... and more importantly, we can access all of those elements and use them elsewhere. For instance, we can get the test statistic from the element `statistic`, or the confidence interval or the estimate by accessing the elements in the list:
 
-```{r}
+```{r eval=FALSE}
 my_test$statistic
+my_test$conf.int
+my_test$estimate
 ```
+
+It is a good moment to go back to the documentation and compare the output of the test against the "Value" section of the help file.
 
 Let's take a deeper look into the formula interface and the structure of objects using a linear model.
 
