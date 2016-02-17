@@ -1,6 +1,6 @@
 Descriptives and simple statistics
 ================
-February 16, 2016
+February 17, 2016
 
 ### Moving from the prompt to the script
 
@@ -89,8 +89,8 @@ The output of `table` is passed to `prop.table` which transforms a table into pr
 We can now start analyzing the data. For instance, we would like to check the difference in the mean of the number of affairs by whether the politician has children or not. The sample mean for each group can be calculated as:
 
 ``` r
-mean(affairs$nbaffairs[affairs$child == "yes"])
 mean(affairs$nbaffairs[affairs$child == "no"])
+mean(affairs$nbaffairs[affairs$child == "yes"])
 ```
 
 A t-test can be performed in several ways. The most natural one for new people to R is passing variables. For instance, if we wanted to test one variable against the standard null:
@@ -114,20 +114,20 @@ t.test(affairs$nbaffairs)
 We can also test equality of two means by passing *two* vectors to the function:
 
 ``` r
-t.test(affairs$nbaffairs[affairs$child == "yes"], affairs$nbaffairs[affairs$child == "no"])
+t.test(affairs$nbaffairs[affairs$child == "no"], affairs$nbaffairs[affairs$child == "yes"])
 ```
 
     ## 
     ##  Welch Two Sample t-test
     ## 
-    ## data:  affairs$nbaffairs[affairs$child == "yes"] and affairs$nbaffairs[affairs$child == "no"]
-    ## t = 3, df = 400, p-value = 0.005
+    ## data:  affairs$nbaffairs[affairs$child == "no"] and affairs$nbaffairs[affairs$child == "yes"]
+    ## t = -3, df = 400, p-value = 0.005
     ## alternative hypothesis: true difference in means is not equal to 0
     ## 95 percent confidence interval:
-    ##  0.234 1.286
+    ##  -1.286 -0.234
     ## sample estimates:
     ## mean of x mean of y 
-    ##     1.672     0.912
+    ##     0.912     1.672
 
 The thing to notice here is that the second vector is a second *optional argument* to the function and, by passing it, the function performs a different routine. Let's take a look at the documentation for `t.test`:
 

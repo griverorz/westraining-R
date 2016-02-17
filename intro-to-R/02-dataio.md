@@ -1,6 +1,6 @@
 Data manipulation and I/O
 ================
-February 16, 2016
+February 17, 2016
 
 ### Data structures (cont.)
 
