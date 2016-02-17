@@ -118,7 +118,7 @@ n <- 10
 sd(replicate(999, mean(rnorm(n, 3, 2))))
 ```
 
-    ## [1] 0.632
+    ## [1] 0.626
 
 which is approximately \(\sigma/\sqrt{n}\), as expected.
 
@@ -129,7 +129,7 @@ x <- rnorm(25, 3.2, 1.7)
 sd(replicate(999, mean(sample(x, length(x), replace=TRUE))))
 ```
 
-    ## [1] 0.416
+    ## [1] 0.336
 
 and that matches:
 
@@ -138,6 +138,6 @@ sqrt(vcov(lm(x ~ 1)))
 ```
 
     ##             (Intercept)
-    ## (Intercept)       0.406
+    ## (Intercept)       0.347
 
 With these elements we can now think about, for instance, making extractions of the posterior distribution of the estimated coefficients in the section above to simulate confidence intervals. Or simulate the distribution of transformations of variables.
