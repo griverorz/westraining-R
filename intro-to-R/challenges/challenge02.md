@@ -1,6 +1,6 @@
 ### Challenge 2: Data analysis and graphics
 
-1. Let's calculate the models that we plotted before.
+1. Let's get some more information about the models that we plotted before.
 
 	a. Read in the dataset on tobacco consumption, and estimate the parameters of the
 	lin-log model between tobacco consumption and tax that we plotted before.
