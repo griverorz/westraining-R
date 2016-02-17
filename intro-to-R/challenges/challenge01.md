@@ -18,7 +18,7 @@
 2. We will see how to perform data analysis in R, but it is probably a good idea
 	to take a look at how to run a simple model manually:
 
-a. Input the following matrices into R, where "na" stands for a missing value. Be careful with the dimensions of `y`.
+	a. Input the following matrices into R, where "na" stands for a missing value. Be careful with the dimensions of `y`.
 
 	 	``` r
 	 		2.1 -0.3
