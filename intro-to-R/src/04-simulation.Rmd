@@ -36,7 +36,7 @@ Usually, we want to see predictions with their uncertainty. Let's take a look at
 
 Not very useful, right? The reason is that `predict` is a _generic function_ that operates on different kinds of objects/models. Think about predictions for a linear model or for a logistic regression. They are still predictions but they are calculated differently and they should be offering different options. But they user should not need to remember the class of the model that was fit: and the end of the day, we have been insisting on the fact that objects in R carry a lot of information around. If we look at the bottom of the help file, we will see the method for `lm` models, which is what we want:
 
-```{r}
+```{r eval=FALSE}
 ?predict.lm
 ```
 
