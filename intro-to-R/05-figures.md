@@ -40,7 +40,7 @@ Getting the density per year is easy: we declare that data is grouped by year an
 ``` r
 p <- ggplot(tobacco, aes(x=tax, group=year, colour=year))
 p + geom_density() +
-    labs(title="Something", x="Age", y="Count")
+    labs(title="Tax rate and tobacco consumption", x="Tax rate", y="Consumption")
 ```
 
 ![](./assets/unnamed-chunk-5-1.png)
@@ -50,7 +50,7 @@ A scatterplot is defined by two dimensions, but the structure remains the same:
 ``` r
 p <- ggplot(tobacco, aes(x=packpc, y=tax))
 p + geom_point() +
-    labs(title="Something", x="Age", y="Count")
+    labs(title="Tax rate and tobacco consumption", x="Tax rate", y="Consumption")
 ```
 
 ![](./assets/unnamed-chunk-6-1.png)
