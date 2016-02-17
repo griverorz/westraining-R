@@ -44,7 +44,9 @@ Not very useful, right? The reason is that `predict` is a _generic function_ tha
 After this small detour, we finally see how to get the confidence intervals:
 
 ```{r}
-my_predictions <- predict(sample_model, newdata=data.frame("age"=54, "child"="yes", religious=1), interval="confidence")
+my_predictions <- predict(sample_model,
+			  newdata=data.frame("age"=54, "child"="yes", religious=1),
+			  interval="confidence")
 my_predictions
 ```
 
