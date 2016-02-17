@@ -24,7 +24,7 @@ my_mean
 ```
 
     ## function(x) sum(x)/length(x)
-    ## <environment: 0x7f977d64acd0>
+    ## <environment: 0x7fe76bea8ed0>
 
 The way we defined the function is perfectly valid but we could also be a bit more explicit by enclosing the statement in parenthesis and ensuring that it is returned.
 
