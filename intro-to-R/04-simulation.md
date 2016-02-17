@@ -8,7 +8,7 @@ Let's take a more careful look at the model we fit before:
 
 ``` r
 affairs <- read.csv("http://koaning.io/theme/data/affairs.csv")
-sample_model <- lm(nbaffairs ~ age, data=affairs)
+sample_model <-  lm(nbaffairs ~ I(age - 18)*child + factor(religious), data=affairs)
 ```
 
 We took a look at some values of interest, like the estimated coefficients or the confidence intervals around them. It may also be interesting to take a look at predictions.
@@ -18,17 +18,27 @@ yhat <- predict(sample_model)
 head(yhat)
 ```
 
-    ##    1    2    3    4    5    6 
-    ## 1.61 1.27 1.44 2.28 1.10 1.44
+    ##     1     2     3     4     5     6 
+    ## 2.612 0.177 2.875 1.380 0.638 1.802
 
 The `predict` method takes a number of uselful arguments, like `newdata`, which applies the estimated coefficients to a new dataset.
 
 ``` r
-predict(sample_model, newdata=data.frame("age"=54), interval="confidence")
+predict(sample_model, newdata=data.frame("age"=54, "child"="yes", religious=1))
 ```
 
-    ##    fit  lwr  upr
-    ## 1 2.18 1.52 2.85
+    ##    1 
+    ## 3.23
+
+``` r
+my_predictions <- predict(sample_model, newdata=data.frame("age"=54, "child"="yes", religious=1))
+my_predictions
+```
+
+    ##    1 
+    ## 3.23
+
+`expand.grid`
 
 ### Simulation and probability
 
@@ -67,16 +77,16 @@ summary(lm(x ~ 1))
     ## 
     ## Residuals:
     ##    Min     1Q Median     3Q    Max 
-    ## -3.758 -1.228  0.250  0.837  3.005 
+    ## -4.680 -0.752 -0.371  1.279  2.725 
     ## 
     ## Coefficients:
     ##             Estimate Std. Error t value Pr(>|t|)
-    ## (Intercept)    3.511      0.315    11.2  5.5e-11
+    ## (Intercept)    3.319      0.305    10.9  9.5e-11
     ## 
-    ## Residual standard error: 1.57 on 24 degrees of freedom
+    ## Residual standard error: 1.53 on 24 degrees of freedom
 
 ``` r
 sd(replicate(9999, mean(sample(x, length(x), replace=TRUE))))
 ```
 
-    ## [1] 0.308
+    ## [1] 0.303
