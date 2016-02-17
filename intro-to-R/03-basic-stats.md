@@ -4,7 +4,9 @@ February 16, 2016
 
 ### Moving from the prompt to the script
 
-So far, we have been doing everything through on the interpreter directly. We will use the interpreter a lot in all the analysis to test things, but it is probably a good idea to keep our code somewhere. Here is when using a tool like RStudio start to make a lot of sense: we want something that makes it easy to edit text files (like navigation tools or syntax highlighting) and also that connects to the R interpreter. You will probably run the rest of the sessions by typing in the "Code" window and running things from there.
+So far, we have been doing everything through on the interpreter directly. We will use the interpreter a lot during data analysis to test things, but it is probably a good idea to keep our code somewhere. Here is when using a tool like RStudio starst to make sense: we want something that makes it easy to edit text files (like navigation tools or syntax highlighting) and also that connects to the R interpreter.
+
+You will probably run the rest of the sessions by typing in the "Code" window and sending things to the console from there.
 
 ### Basic data analysis
 
@@ -91,7 +93,49 @@ mean(affairs$nbaffairs[affairs$child == "yes"])
 mean(affairs$nbaffairs[affairs$child == "no"])
 ```
 
-A t-test can be performed by using the function `t.test` with the formula interface. Formulas play a huge role in R:
+A t-test can be performed in several ways. The most natural one for new people to R is passing variables. For instance, if we wanted to test one variable against the standard null:
+
+``` r
+t.test(affairs$nbaffairs)
+```
+
+    ## 
+    ##  One Sample t-test
+    ## 
+    ## data:  affairs$nbaffairs
+    ## t = 10, df = 600, p-value <2e-16
+    ## alternative hypothesis: true mean is not equal to 0
+    ## 95 percent confidence interval:
+    ##  1.19 1.72
+    ## sample estimates:
+    ## mean of x 
+    ##      1.46
+
+We can also test equality of two means by passing *two* vectors to the function:
+
+``` r
+t.test(affairs$nbaffairs[affairs$child == "yes"], affairs$nbaffairs[affairs$child == "no"])
+```
+
+    ## 
+    ##  Welch Two Sample t-test
+    ## 
+    ## data:  affairs$nbaffairs[affairs$child == "yes"] and affairs$nbaffairs[affairs$child == "no"]
+    ## t = 3, df = 400, p-value = 0.005
+    ## alternative hypothesis: true difference in means is not equal to 0
+    ## 95 percent confidence interval:
+    ##  0.234 1.286
+    ## sample estimates:
+    ## mean of x mean of y 
+    ##     1.672     0.912
+
+The thing to notice here is that the second vector is a second *optional argument* to the function and, by passing it, the function performs a different routine. Let's take a look at the documentation for `t.test`:
+
+``` r
+?t.test
+```
+
+We see that there are two separate *methods* (more about this in a second) for interacting with `t.test`: the one we just used, passing arguments `x` and maybe `y`, and another one that usesa `formula`. Formulas play a huge role in R:
 
 ``` r
 my_test <- t.test(nbaffairs ~ child, data=affairs)
@@ -137,14 +181,15 @@ str(my_test)
     ##  $ data.name  : chr "nbaffairs by child"
     ##  - attr(*, "class")= chr "htest"
 
-Note that `my_test` is a list that contains all the information pertaining to the t-test we ran. It contains the statistic, the degrees of freedom, the confidence interval, ... and more importantly, we can access all of those elements and use them elsewhere. For instance, we can get the test statistic from the element `statistic`:
+Note that `my_test` is a list that contains all the information pertaining to the t-test we ran. It contains the statistic, the degrees of freedom, the confidence interval, ... and more importantly, we can access all of those elements and use them elsewhere. For instance, we can get the test statistic from the element `statistic`, or the confidence interval or the estimate by accessing the elements in the list:
 
 ``` r
 my_test$statistic
+my_test$conf.int
+my_test$estimate
 ```
 
-    ##     t 
-    ## -2.84
+It is a good moment to go back to the documentation and compare the output of the test against the "Value" section of the help file.
 
 Let's take a deeper look into the formula interface and the structure of objects using a linear model.
 
@@ -157,9 +202,9 @@ Consider the case in which we can to now run a regression on the number of affai
 sample_model <- lm(nbaffairs ~ I(age - 18)*child + factor(religious), data=affairs)
 ```
 
-We can see here the elegance of the formula interface. The model is doing several things. First, we are recentering age so that 18 is the new 0 value. It is important that the expression is wrapped in the `I()` function to ensure that the `-` inside is taken as an arithmetical operator and not as a formula operator. Then, multiply that new variable by the variable `child` which is a factor, which uses `yes` as the reference level in the dummy expansion. Not only that, the `*` operator creates the full interaction including the main effects. Finally, although `religious` is an numerical variable, we pass it through `factor` to cast it into a categorical with \(n - 1\) dummies. As we can see, the formula takes care of a lot of the transformations and lets us express the structure of the model very succintly.
+We can see here the elegance of the formula interface. The model is doing several things. First, we are recentering age so that 18 is the new 0 value. It is important that the expression is wrapped in the `I()` function to ensure that the `-` inside is taken as an arithmetical operator and not as a formula operator. Then, multiply that new variable by the variable `child` which is a factor, which uses `yes` as the reference level in the dummy expansion. Not only that, the `*` operator creates the full interaction including the main effects. Finally, although `religious` is an numerical variable, we pass it through `factor` to cast it into a categorical with \(n - 1\) dummies. As we can see, the formula takes care of a lot of the transformations and lets us express the structure of the model very succintly. We could have passed the transformed data directly (look at the `y` and `x` arguments in the `lm` documentation), but this approach is considerably easier.
 
-Printing the object gets us the coefficients
+Lets take a look at the object to see the estimated coefficients:
 
 ``` r
 sample_model
@@ -178,7 +223,7 @@ sample_model
     ##   factor(religious)5  I(age - 18):childyes  
     ##               -1.899                -0.100
 
-but the `summary` function applied to it gives us a lot more information:
+Sometimes that is the only information that we need, but most of the time we want to make inference with those coefficients. We can see this information by getting a `summary` of the object:
 
 ``` r
 summary_model <- summary(sample_model)
@@ -208,6 +253,25 @@ summary_model
     ## Residual standard error: 3.22 on 593 degrees of freedom
     ## Multiple R-squared:  0.0612, Adjusted R-squared:  0.0501 
     ## F-statistic: 5.52 on 7 and 593 DF,  p-value: 3.58e-06
+
+Let's see how the two objects (`sample_model` and `summary_model`) differ by taking a look at what they contain:
+
+``` r
+names(sample_model)
+```
+
+    ##  [1] "coefficients"  "residuals"     "effects"       "rank"         
+    ##  [5] "fitted.values" "assign"        "qr"            "df.residual"  
+    ##  [9] "contrasts"     "xlevels"       "call"          "terms"        
+    ## [13] "model"
+
+``` r
+names(summary_model)
+```
+
+    ##  [1] "call"          "terms"         "residuals"     "coefficients" 
+    ##  [5] "aliased"       "sigma"         "df"            "r.squared"    
+    ##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"
 
 ### The shortest introduction to objects and methods
 
