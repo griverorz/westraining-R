@@ -21,15 +21,15 @@
 	a. Input the following matrices into R, where "na" stands for a missing value. Be careful with the dimensions of `y`.
 
 	``` r
-	2.1 -0.3
+		2.1 -0.3
 	X = 3.2	 na
-	4.7 -2.9
+		4.7 -2.9
 	```
 	
 	``` r
-	1.1
+		1.1
 	y = 1.6
-	2.5
+		2.5
 	```
 
 	b. Impute the missing value in `X` with the column mean.
