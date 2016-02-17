@@ -132,17 +132,24 @@ Consider the case in which we can to now run a regression on the number of affai
 sample_model <- lm(nbaffairs ~ I(age - 18)*child + factor(religious), data=affairs)
 ```
 
-We can see here the elegance of the formula interface. The model is doing several things. First, we are recentering age so that 18 is the new 0 value. It is important that the expression is wrapped in the `I()` function to ensure that the `-` inside is taken as an arithmetical operator and not as a formula operator. Then,  multiply that new variable by the variable `child` which is a factor, which uses `yes` as the reference level in the dummy expansion. Not only that, the `*` operator creates the full interaction including the main effects. Finally, although `religious` is an numerical variable, we pass it through `factor` to cast it into a categorical with $n - 1$ dummies. As we can see, the formula takes care of a lot of the transformations and lets us express the structure of the model very succintly. 
+We can see here the elegance of the formula interface. The model is doing several things. First, we are recentering age so that 18 is the new 0 value. It is important that the expression is wrapped in the `I()` function to ensure that the `-` inside is taken as an arithmetical operator and not as a formula operator. Then,  multiply that new variable by the variable `child` which is a factor, which uses `yes` as the reference level in the dummy expansion. Not only that, the `*` operator creates the full interaction including the main effects. Finally, although `religious` is an numerical variable, we pass it through `factor` to cast it into a categorical with $n - 1$ dummies. As we can see, the formula takes care of a lot of the transformations and lets us express the structure of the model very succintly. We could have passed the transformed data directly (look at the `y` and `x` arguments in the `lm` documentation), but this approach is considerably easier.
 
-Printing the object gets us the coefficients
+Lets take a look at the object to see the estimated coefficients:
 ```{r}
 sample_model
 ```
 
-but the `summary` function applied to it gives us a lot more information:
+Sometimes that is the only information that we need, but most of the time we want to make inference with those coefficients. We can see this information by getting a `summary` of the object: 
 ```{r}
 summary_model <- summary(sample_model)
 summary_model
+```
+
+Let's see how the two objects (`sample_model` and `summary_model`) differ by taking a look at what they contain:
+
+```{r}
+names(sample_model)
+names(summary_model)
 ```
 
 ### The shortest introduction to objects and methods
