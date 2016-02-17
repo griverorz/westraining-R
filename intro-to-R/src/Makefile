@@ -3,5 +3,5 @@ build:
 	mv ./assets/*.png ../assets/.
 	rm -r ./assets
 	sed -i '' 's/<!-- -->//' ../*.md
-	git add ../*.md
+	git add ../*.md ../assets/.
 	git commit -m "Update md files"
