@@ -1,6 +1,15 @@
 ### Challenge 2: Data analysis and graphics
 
-1. Let's get some more information about the models that we plotted before.
+1. Let's take a look at the Central Limit Theorem:
+
+	a. Make 10 extractions of a balanced Bernoulli distribution and calculate
+    the proportion of 1's.
+
+	b. Replicate the experiment 1000 times.
+	
+	c. Create a histogram with the results of the experiment before. 
+
+2. Now lets get some more information about the models that we plotted before.
 
 	a. Read in the dataset on tobacco consumption, and estimate the parameters of the
 	lin-log model between tobacco consumption and tax that we plotted before.
@@ -14,12 +23,4 @@
 	e. Estimate the parameters of the lin-log model above with fixed effects per
     state, and get the predictions using the average tax rate in that state.
 
-2. Let's take a look at the Central Limit Theorem:
-
-	a. Make 10 extractions of a balanced Bernoulli distribution and calculate
-    the proportion of 1's.
-
-	b. Replicate the experiment 1000 times.
-	
-	c. Create a histogram with the results of the experiment before. 
 
