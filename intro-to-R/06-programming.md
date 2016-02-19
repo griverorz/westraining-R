@@ -24,7 +24,7 @@ my_mean
 ```
 
     ## function(x) sum(x)/length(x)
-    ## <environment: 0x7f98eccca008>
+    ## <environment: 0x7f9035e6a6d0>
 
 The way we defined the function is perfectly valid but we could also be a bit more explicit by enclosing the statement in parenthesis and ensuring that it is returned.
 
@@ -139,12 +139,12 @@ which we may wrap up in a function
 ``` r
 my_sign <- function(x) {
   if (x > 0) {
-  out <- "It's positive!"
-} else if (x == 0) {
-  out <- "It's neither positive nor negative!"
-} else {
-  out <- "It's negative!"
-}
+    out <- "It's positive!"
+  } else if (x == 0) {
+    out <- "It's neither positive nor negative!"
+  } else {
+    out <- "It's negative!"
+  }
   return(out)
 }
 ```
@@ -161,21 +161,22 @@ How to deal with the previous issue? By issuing an error:
 
 ``` r
 my_sign <- function(x) {
-if (!is.numeric(x)) {
-stop("Input is not a number")
-}
+  if (!is.numeric(x)) {
+    stop("Input is not a number")
+  }
+  
   if (x > 0) {
-  out <- "It's positive!"
-} else if (x == 0) {
-  out <- "It's neither positive nor negative!"
-} else {
-  out <- "It's negative!"
-}
+    out <- "It's positive!"
+  } else if (x == 0) {
+    out <- "It's neither positive nor negative!"
+  } else {
+    out <- "It's negative!"
+  }
   return(out)
 }
 ```
 
-Two things two notice here. First, that `!` is the negation operator (`TRUE == !FALSE`). Second, that `stop` interrupts the evaluation and produces an error.
+Two things two notice here. First, that `!` is the negation operator (`TRUE == !FALSE`). Second, that `stop` interrupts the evaluation and produces an error, so the function never reaches the next conditional.
 
 The if-else structure is the building block of a rejection sampling algorithm, so let's use to makes samples out of a \(Beta(3,6)\).
 
