@@ -133,7 +133,7 @@ my_sign <- function(x) {
 }
 ```
 
-and use it to illustrate what happens when you are not careful:
+and use it to illustrate what happens when you are not careful:[^1]
 ```{r}
 my_sign("A cow")
 ```
