@@ -1,6 +1,6 @@
 The very basics of programming
 ================
-February 17, 2016
+February 18, 2016
 
 One of the very nice features of R when one comes from other statistical software like SAS or Stata is that it is very easy to program. And that is a really good thing, because the manipulation, analysis, and visualization of data is considerably easier when one can write small functions. In addition, because R is open-source, you can inspect what every function does, so it is useful to get a sense of the most basic elements of programming to be able to take advantage of that feature.
 
@@ -24,7 +24,7 @@ my_mean
 ```
 
     ## function(x) sum(x)/length(x)
-    ## <environment: 0x7fe76bea8ed0>
+    ## <environment: 0x7f98eccca008>
 
 The way we defined the function is perfectly valid but we could also be a bit more explicit by enclosing the statement in parenthesis and ensuring that it is returned.
 
@@ -48,7 +48,7 @@ for (i in 1:3) print(i)
     ## [1] 2
     ## [1] 3
 
-Let's see a less trivial example in which we want to calculate the cumulative sum of a vector (already provided in R as `cumsum`):
+Let's see a less trivial example in which we want to calculate the sum of a vector:
 
 ``` r
 myvector <- c(1, 2, 3, 4)
@@ -63,17 +63,17 @@ out
 
 Here `out` will hold the result of progressively adding the values of `myvector`. Notice how `i` takes, in each iteration, a different value in the sequence between 1 and the length of `myvector` that we then use to retrieve the value in each position.
 
-Depending on the context, it will probably make sense to wrap this operations in a function. At the end of the day, the only thing that will change in different calculations of a cummulative sum is the vector it operates over, so we can *parametrize* over that vector:
+Depending on the context, it will probably make sense to wrap this operations in a function. At the end of the day, the only thing that will change in different calculations of a sum is the vector it operates over, so we can *parametrize* over that vector:
 
 ``` r
-my_cumsum <- function(x) {
+my_sum <- function(x) {
   out <- 0
   for (i in 1:length(x)) {
     out <- x[i] + out
   }
   return(out)
 }
-my_cumsum(c(1, 2, 3, 4))
+my_sum(c(1, 2, 3, 4))
 ```
 
     ## [1] 10
@@ -157,6 +157,26 @@ my_sign("A cow")
 
     ## [1] "It's positive!"
 
+How to deal with the previous issue? By issuing an error:
+
+``` r
+my_sign <- function(x) {
+if (!is.numeric(x)) {
+stop("Input is not a number")
+}
+  if (x > 0) {
+  out <- "It's positive!"
+} else if (x == 0) {
+  out <- "It's neither positive nor negative!"
+} else {
+  out <- "It's negative!"
+}
+  return(out)
+}
+```
+
+Two things two notice here. First, that `!` is the negation operator (`TRUE == !FALSE`). Second, that `stop` interrupts the evaluation and produces an error.
+
 The if-else structure is the building block of a rejection sampling algorithm, so let's use to makes samples out of a \(Beta(3,6)\).
 
 ``` r
@@ -184,4 +204,4 @@ p + geom_density() +
     stat_function(fun=dbeta, args=list(3, 6), colour="red", linetype=2)
 ```
 
-![](./assets/unnamed-chunk-12-1.png)
+![](./assets/unnamed-chunk-13-1.png)

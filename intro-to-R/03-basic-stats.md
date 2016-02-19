@@ -1,6 +1,6 @@
 Descriptives and simple statistics
 ================
-February 17, 2016
+February 18, 2016
 
 ### Moving from the prompt to the script
 
