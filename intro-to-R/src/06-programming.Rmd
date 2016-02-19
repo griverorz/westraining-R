@@ -47,7 +47,8 @@ Now that we have the fundamentals of how to define a function, let's take a look
 for (i in 1:3) print(i)
 ```
 
-Let's see a less trivial example in which we want to calculate the cumulative sum of a vector (already provided in R as `cumsum`):
+Let's see a less trivial example in which we want to calculate the sum of a
+vector:
 
 ```{r}
 myvector <- c(1, 2, 3, 4)
@@ -60,18 +61,21 @@ out
 
 Here `out` will hold the result of progressively adding the values of `myvector`. Notice how `i` takes, in each iteration, a different value in the sequence between 1 and the length of `myvector` that we then use to retrieve the value in each position. 
 
-Depending on the context, it will probably make sense to wrap this operations in a function. At the end of the day, the only thing that will change in different calculations of a cummulative sum is the vector it operates over, so we can _parametrize_ over that vector:
+Depending on the context, it will probably make sense to wrap this operations in
+a function. At the end of the day, the only thing that will change in different
+calculations of a sum is the vector it operates over, so we can _parametrize_
+over that vector:
 
 
 ```{r}
-my_cumsum <- function(x) {
+my_sum <- function(x) {
   out <- 0
   for (i in 1:length(x)) {
     out <- x[i] + out
   }
   return(out)
 }
-my_cumsum(c(1, 2, 3, 4))
+my_sum(c(1, 2, 3, 4))
 ```
 
 Another way to build loops is with the statement `while`. It will evaluate an expression until a condition is not met:
@@ -133,6 +137,26 @@ and use it to illustrate what happens when you are not careful:
 ```{r}
 my_sign("A cow")
 ```
+
+How to deal with the previous issue? By issuing an error:
+
+```{r}
+my_sign <- function(x) {
+if (!is.numeric(x)) {
+stop("Input is not a number")
+}
+  if (x > 0) {
+  out <- "It's positive!"
+} else if (x == 0) {
+  out <- "It's neither positive nor negative!"
+} else {
+  out <- "It's negative!"
+}
+  return(out)
+}
+```
+
+Two things two notice here. First, that `!` is the negation operator (`TRUE == !FALSE`). Second, that `stop` interrupts the evaluation and produces an error. 
 
 The if-else structure is the building block of a rejection sampling algorithm, so let's use to makes samples out of a $Beta(3,6)$.
 ```{r}
