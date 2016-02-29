@@ -48,7 +48,7 @@ _Day 3:_
 - Writing your own functions
 - More data manipulation: split-apply-combine, merge and reshape.
 
-### Notes
+### Materials
 | Section| Materials |
 |---|---|
 | Overview | [md](./00-intro.md), [pdf](./pdfs/00-intro.pdf) |
