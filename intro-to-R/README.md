@@ -43,14 +43,14 @@ _Day 3:_
 ### Notes
 | Section| Notes |
 |---|---|
-| Overview | [md](./md/00-intro.md), [pdf](./pdfs/00-intro.pdf) |
-| The building blocks | [md](./md/01-types.md), [pdf](./pdfs/01-types.pdf) |
-| Data manipulation and I/O | [md](./md/02-dataio.md), [pdf](./pdfs/02-dataio.pdf) |
-| Descriptives and simple statistics | [md](./md/03-basic-stats.md), [pdf](./pdfs/03-basic-stats.pdf) |
-| Inference, probability, and simulation | [md](./md/04-simulation.md), [pdf](./pdfs/04-simulation.pdf) |
-| Figures using `ggplot2` | [md](./md/05-figures.md),[pdf](./pdfs/05-figures.pdf) |
-| The very basics of programming |  [md](./md/06-programming.md), [pdf](./pdfs/06-programming.pdf) |
-| More data manipulation |  [md](./md/07-data-manipuation.md),[pdf](./pdf/07-data-manipulation.pdf) |
+| Overview | [md](./00-intro.md), [pdf](./pdfs/00-intro.pdf) |
+| The building blocks | [md](./01-types.md), [pdf](./pdfs/01-types.pdf) |
+| Data manipulation and I/O | [md](./02-dataio.md), [pdf](./pdfs/02-dataio.pdf) |
+| Descriptives and simple statistics | [md](./03-basic-stats.md), [pdf](./pdfs/03-basic-stats.pdf) |
+| Inference, probability, and simulation | [md](./04-simulation.md), [pdf](./pdfs/04-simulation.pdf) |
+| Figures using `ggplot2` | [md](./05-figures.md), [pdf](./pdfs/05-figures.pdf) |
+| The very basics of programming |  [md](./06-programming.md), [pdf](./pdfs/06-programming.pdf) |
+| More data manipulation |  [md](./07-data-manipuation.md), [pdf](./pdf/07-data-manipulation.pdf) |
 
 ### What's next?
 
