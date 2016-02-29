@@ -28,6 +28,7 @@ _Day 1:_
 - Data types and data structures
 - I/O and data manipulation
 
+
 _Day 2:_
 
 - Basic statistics and modeling
@@ -49,4 +50,4 @@ There are a number of topics that are left out that have to do with a more advan
 - Non-standard evaluation
 - Package development
 
-Some of them may be covered in an advanced class.
+Some of them may be covered in the advanced class.
