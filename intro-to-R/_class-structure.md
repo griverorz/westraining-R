@@ -28,7 +28,6 @@ _Day 1:_
 - Data types and data structures
 - I/O and data manipulation
 
-
 _Day 2:_
 
 - Basic statistics and modeling
@@ -40,6 +39,18 @@ _Day 3:_
 - Control flow statements
 - Writing your own functions
 - More data manipulation: split-apply-combine, merge, reshape, ...
+
+### Printer-friendly notes
+| Section| Notes |
+|---|---|
+| Overview | [pdf](./pdfs/00-intro.pdf) |
+| The building blocks | [pdf](./pdfs/01-types.pdf) |
+| Data manipulation and I/O | [pdf](./pdfs/02-dataio.pdf) |
+| Descriptives and simple statistics | [pdf](./pdfs/03-basic-stats.pdf) |
+| Inference, probability, and simulation | [pdf](./pdfs/04-simulation.pdf) |
+| Figures using `ggplot2` | [pdf](./pdfs/05-figures.pdf) |
+| The very basics of programming |  [pdf](./pdfs/05-programming.pdf) |
+| More data manipulation |  [pdf](./pdf/06-data-manipulation.pdf) |
 
 ### What's next?
 
