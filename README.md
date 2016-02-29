@@ -27,8 +27,7 @@ community-maintained resources available to R users.
 ## Advanced R
 
 The class is adapted to the necessities of statistical programmers and covers
-two main topics. First, object-oriented programming using S3 and S4 classes and
-package development.
+object-oriented programming using S3 and S4 classes and package development.
 
 The class draws heavily from: 
 
