@@ -2,6 +2,7 @@
 title: "Inference, probability and simulation"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
+  pdf_document: default	  
   github_document:
     html_preview: false
 ---

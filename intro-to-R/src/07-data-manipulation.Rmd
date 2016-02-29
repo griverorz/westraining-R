@@ -2,6 +2,7 @@
 title: "More data manipulation"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
+  pdf_document: default
   github_document:
     html_preview: false
 ---
