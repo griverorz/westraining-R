@@ -10,8 +10,8 @@
    
    ```r
    dta <- data.frame("house_id"=rep(1:25, each=5),
-		          "person_id"=1:5,
-				  "age"=rbinom(125 , 100, .4))
+                     "person_id"=1:5,
+				     "age"=rbinom(125 , 100, .4))
    ```
 
 	a. Get the age of the youngest individual in each household.
@@ -22,7 +22,7 @@
 
 	```r
 	dta$weight <- runif(125)
-	dta$attr1 <- ifelse(rbinom(125, 1, 0.85), rpois(1, .5), NA)
+	dta$attr1 <- ifelse(rbinom(125, 1, 0.85), rpois(125, .5), NA)
 	```
 
 	Write a function that calculates a weighted average and apply it to the dataset to get the weighted average of `attr1` for each household.
