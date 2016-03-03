@@ -74,7 +74,14 @@ write.csv(states, file="states.csv")
 ```
 
 Note the named argument to indicate the filename. We could have specified any
-other folder/directory by passing a path.
+other folder/directory by passing a path. In the previous call, the file will be
+written to our current working directory. We can see which one it is with:
+
+```{r}
+getwd()
+```
+
+and we can use the `setwd()` to set it. 
 
 Unsurprisingly, we can read our dataset back using `read.csv`.
 ```{r eval=FALSE}
