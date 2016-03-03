@@ -19,7 +19,7 @@
 	lin-log model between tobacco consumption and tax that we plotted before.
 
 	b. Calculate the predicted values of the model in the previous sections with
-	confidence intervals at the 99\% confidence level.
+	confidence intervals at the 99% confidence level.
 
 	c. Plot the predicted values you calculated above without using the `stat`
     and `formula` arguments.
