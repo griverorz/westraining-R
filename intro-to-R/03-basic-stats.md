@@ -1,6 +1,6 @@
 Descriptives and simple statistics
 ================
-February 29, 2016
+March 07, 2016
 
 ### Moving from the prompt to the script
 
@@ -306,6 +306,23 @@ confint(sample_model)
 
 The two lines previous illustrate the way R works. `sample_model` is an object that contains a number of *attributes* like the coefficients or the residual degrees-of-freedom that were obtained when we fit the model. We access these attributes either through functions like `coefficients` or through the `$` operator, because `sample_model` is still a list.
 
-On the other hand, we can make operations over the elements in `sample_model`. Moreover, these function will know that they are being applied to the outcome of a linear model. In this case, `sample_model` does not contain the confidence interval (why should it?), but `confint` knows where to look for the information it needs in the object. `confint` is therefore a *method*.
+``` r
+names(sample_model)
+```
+
+    ##  [1] "coefficients"  "residuals"     "effects"       "rank"         
+    ##  [5] "fitted.values" "assign"        "qr"            "df.residual"  
+    ##  [9] "contrasts"     "xlevels"       "call"          "terms"        
+    ## [13] "model"
+
+On the other hand, we can make operations over the elements in `sample_model`. Moreover, these function will know that they are being applied to the outcome of a linear model, because that information is given by the class to which `sample_model` belongs.
+
+``` r
+class(sample_model)
+```
+
+    ## [1] "lm"
+
+In this case, `sample_model` does not contain the confidence interval (why should it?), but `confint` knows where to look for the information it needs in the object. `confint` is therefore a *method*.
 
 [1] The function could be applied to a dataset but I find that amount of information overwhelming.

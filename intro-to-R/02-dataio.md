@@ -1,6 +1,6 @@
 Data manipulation and I/O
 ================
-February 29, 2016
+March 07, 2016
 
 ### Data structures (cont.)
 
@@ -68,7 +68,15 @@ We can write our dataset to disk in comma-separated format using the `write.csv`
 write.csv(states, file="states.csv")
 ```
 
-Note the named argument to indicate the filename. We could have specified any other folder/directory by passing a path.
+Note the named argument to indicate the filename. We could have specified any other folder/directory by passing a path. In the previous call, the file will be written to our current working directory. We can see which one it is with:
+
+``` r
+getwd()
+```
+
+    ## [1] "/Users/gonzalorivero/westat/westraining-R/intro-to-R/src"
+
+and we can use the `setwd()` to set it.
 
 Unsurprisingly, we can read our dataset back using `read.csv`.
 
