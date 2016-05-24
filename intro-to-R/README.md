@@ -58,7 +58,7 @@ _Day 3:_
 | Inference, probability, and simulation | [md](./04-simulation.md), [pdf](./pdfs/04-simulation.pdf) |
 | Figures using `ggplot2` | [md](./05-figures.md), [pdf](./pdfs/05-figures.pdf) |
 | The very basics of programming |  [md](./06-programming.md), [pdf](./pdfs/06-programming.pdf) |
-| More data manipulation |  [md](./07-data-manipuation.md), [pdf](./pdfs/07-data-manipulation.pdf) |
+| More data manipulation |  [md](./07-data-manipulation.md), [pdf](./pdfs/07-data-manipulation.pdf) |
 
 ### What's next?
 
