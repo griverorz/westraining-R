@@ -24,10 +24,11 @@ with previous experience in R or in software development.
 
 - R packaging and `devtools`
 - Documentation using `roxygen2`
-- GitHub and Travis 
-
-- Unit testing using `testhat`
-- Code coverage
-
 - Including C/C++ code
 - Concurrent programming with `parallel` and `foreach`
+
+- Reproducibility
+- makefiles
+- Unit testing using `testhat`
+- Code coverage
+- GitHub and Travis 
