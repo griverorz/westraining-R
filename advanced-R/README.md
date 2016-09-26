@@ -20,21 +20,21 @@ programming concepts that are also probably outside my background.
 ### Structure
 
 Day 1:
-    - A review of functions in R.
-    - Environments.
-    - Object-oriented programming using the S4 classes.
+- A review of functions in R.
+- Environments.
+- Object-oriented programming using the S4 classes.
 
 Day 2:
-    - The structure of R packages.
-    - Including C++ code.
-    - Documentation using `roxygen2`.
-    - Unit testing using `testhat`
+- The structure of R packages.
+- Including C++ code.
+- Documentation using `roxygen2`.
+- Unit testing using `testhat`
 
 Day 3: 
-    - Version control using `git`.
-    - GitHub and Continuous Integration in Travis.
-    - A reproducible workflow with `makefile`.
-    - Code coverage.
+- Version control using `git`.
+- GitHub and Continuous Integration in Travis.
+- A reproducible workflow with `makefile`.
+- Code coverage.
 
 ### Readings
 
