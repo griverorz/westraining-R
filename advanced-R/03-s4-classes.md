@@ -25,7 +25,7 @@ new("nps", values=sample(0:10, size=10, replace=TRUE), top=9:10, bottom=0:6)
 
     ## An object of class "nps"
     ## Slot "values":
-    ##  [1]  0  1  8  8 10  4  3  4  7  7
+    ##  [1] 5 9 1 5 5 7 3 4 2 1
     ## 
     ## Slot "top":
     ## [1]  9 10
@@ -118,8 +118,8 @@ summary(x)
 ```
 
     ## 
-    ##  2  3  4  5  6  9 10 
-    ##  1  1  2  2  1  1  2
+    ##  0  2  3  5  7  8  9 10 
+    ##  1  3  1  1  1  1  1  1
 
 We can list the methods associated with a class
 
@@ -195,7 +195,7 @@ and now:
 score(x)
 ```
 
-    ## [1] -0.1
+    ## [1] 0
 
 There are special methods for `[` and `foo<-` (replacement functions). Although they can created in a different way in `R`, I find this solution cleaner:
 
@@ -225,7 +225,7 @@ x
 
     ## An object of class "nps"
     ## Slot "values":
-    ##  [1]  5  4  5  2  3  6 10 10  4  9
+    ##  [1]  2  3  5 10  7  2  8  9  2  0
     ## 
     ## Slot "top":
     ## [1]  8  9 10
@@ -259,7 +259,7 @@ We can also create a `[` method to perform subset and replicate this operation:
 x@values[1:4]
 ```
 
-    ## [1] 5 4 5 2
+    ## [1]  2  3  5 10
 
 The new method takes at least two arguments `x` and `i`:
 
@@ -279,7 +279,7 @@ x[1:4]
 
     ## An object of class "nps"
     ## Slot "values":
-    ## [1] 5 4 5 2
+    ## [1]  2  3  5 10
     ## 
     ## Slot "top":
     ## [1]  8  9 10
