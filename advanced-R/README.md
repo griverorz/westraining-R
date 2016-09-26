@@ -20,27 +20,30 @@ programming concepts that are also probably outside my background.
 ### Structure
 
 Day 1:
-- A review of functions in R.
-
-- Environments.
-
-- Object-oriented programming using the S4 classes.
+    - A review of functions in R.
+    - Environments.
+    - Object-oriented programming using the S4 classes.
 
 Day 2:
-- The structure of R packages.
-
-- Including C++ code.
-
-- Documentation using `roxygen2`.
-
-- Unit testing using `testhat`
+    - The structure of R packages.
+    - Including C++ code.
+    - Documentation using `roxygen2`.
+    - Unit testing using `testhat`
 
 Day 3: 
-- Version control using `git`.
+    - Version control using `git`.
+    - GitHub and Continuous Integration in Travis.
+    - A reproducible workflow with `makefile`.
+    - Code coverage.
 
-- GitHub and Continuous Integration in Travis.
+### Readings
 
-- A reproducible workflow with `makefile`.
+The class is *very* heavily based on 
 
-- Code coverage.
+- [The Art of R Programming](http://www.amazon.com/Art-Programming-Statistical-Software-Design/dp/1593273843/), by Norman Matloff
+- [Extending R](https://www.crcpress.com/Extending-R/Chambers/p/book/9781498775717),
+by John Chambers.
+- [Advanced R Programming](http://www.amazon.com/Advanced-Chapman-Hall-CRC-Series/dp/1466586966), by Hadley Wickham
+- [R Packages](https://www.amazon.com/dp/1491910593/ref=cm_sw_su_dp?tag=r-pkgs-20),
+  by Hadley Wickham
 
