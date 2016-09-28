@@ -11,13 +11,13 @@ e <- new.env()
 e
 ```
 
-    ## <environment: 0x7fc696d71828>
+    ## <environment: 0x7fba1e2eee28>
 
 ``` r
 parent.env(e)
 ```
 
-    ## <environment: 0x7fc698261578>
+    ## <environment: 0x7fba1bc3bb78>
 
 There are four special environments:
 

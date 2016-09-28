@@ -1,4 +1,4 @@
-GitHub and Travis
+Code coverage
 ================
 September 28, 2016
 
