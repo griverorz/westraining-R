@@ -1,6 +1,6 @@
 Using C++ code
 ================
-September 27, 2016
+September 28, 2016
 
 R is able to connect to Fortran, C or C++ source code. This is very helpful for some functions that may be slow in R. That way we can do some manipulations in R, send the data to C++ for the heavylifting and then return the output back to R. The `Rcpp` package makes the connection to C++ very easy.
 
@@ -28,8 +28,8 @@ add
 ```
 
     ## function (x, y, z) 
-    ## .Primitive(".Call")(<pointer: 0x10e9bdf30>, x, y, z)
-    ## <environment: 0x7f83bba0de00>
+    ## .Primitive(".Call")(<pointer: 0x10d303f30>, x, y, z)
+    ## <environment: 0x7fc6982f8188>
 
 ``` r
 add(1, 2, 3)

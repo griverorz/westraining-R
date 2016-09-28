@@ -1,6 +1,6 @@
 Unit testing
 ================
-September 27, 2016
+September 28, 2016
 
 In non-trivial programming tasks, we want to be able to verify that changes to the code are not breaking some of the elementary functions. To help mitigate this problem, we may want to deploy a number of functions that validate that some functions produce the expected predetermined results. This is what "unit testing" accomplishes.
 

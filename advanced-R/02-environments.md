@@ -1,6 +1,6 @@
 The basics of environments
 ================
-September 27, 2016
+September 28, 2016
 
 Environments are important to understand some of the *quirks* of the `R` language. Environments box names associated to values or as a bag that keeps some names together.
 
@@ -11,13 +11,13 @@ e <- new.env()
 e
 ```
 
-    ## <environment: 0x7f83bbeec180>
+    ## <environment: 0x7fc696d71828>
 
 ``` r
 parent.env(e)
 ```
 
-    ## <environment: 0x7f83bb9b3c28>
+    ## <environment: 0x7fc698261578>
 
 There are four special environments:
 
@@ -35,9 +35,10 @@ We can list the parents of the `globalenv()` with the `search()` function:
 search()
 ```
 
-    ## [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
-    ## [4] "package:grDevices" "package:utils"     "package:datasets" 
-    ## [7] "package:methods"   "Autoloads"         "package:base"
+    ##  [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
+    ##  [4] "package:grDevices" "package:utils"     "package:datasets" 
+    ##  [7] "package:setwidth"  "package:colorout"  "package:methods"  
+    ## [10] "Autoloads"         "package:base"
 
 Environments are relevant because they are used by functions. Functions are associated with four types of environments:
 

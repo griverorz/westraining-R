@@ -1,6 +1,6 @@
 Parallel computing
 ================
-September 27, 2016
+September 28, 2016
 
 We saw that one one to speed up our code was to rely on C++ for some heavylifting. Another alternative is to take advantage of some of the parallelization tools in `R`.
 
@@ -42,7 +42,7 @@ ptime[3]
 ```
 
     ## elapsed 
-    ##    28.3
+    ##    21.2
 
 What's the bottleneck? That we are waiting for one operation to finish before starting the next one. However, we have some spare cores in our computer (or nodes in a cluster) that can be used to run some of the inverses regardless of what happens in the other nodes.
 
@@ -85,6 +85,6 @@ ptime[3]
 ```
 
     ## elapsed 
-    ##    13.7
+    ##    13.1
 
 We can see that, even in this simple example, in a machine with 4 cores, there are already very significant improvements in performance. However, notice that the improvement is not 4x because there is considerable overhead in moving data around and manipulating results.

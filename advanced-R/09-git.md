@@ -1,6 +1,6 @@
 Version control using `git`
 ================
-September 27, 2016
+September 28, 2016
 
 Sometimes you make mistakes and want to revert to an old version of the code, or you want to explore some features that may or may not end up belonging to the project, or you want to cooperate with other people and be able to selectively incorporate their changes to the codebase. Version control systems help with all these tasks. A version control system is essentially a way to keep code organized that lets you go back to different versions of the file and gives you tools to merge different versions from different authors.
 

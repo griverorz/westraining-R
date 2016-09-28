@@ -1,6 +1,6 @@
 Documentation using Roxygen
 ================
-September 27, 2016
+September 28, 2016
 
 R documentation is great and, more importantly, it is easy to create. Obviously, you can just add comments to the code or external documentation, but it is a lot better to just be able to pull the documentation when you type `?function` in your console.
 

@@ -1,6 +1,6 @@
 GitHub and Travis
 ================
-September 27, 2016
+September 28, 2016
 
 GitHub
 ------
