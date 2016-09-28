@@ -1,6 +1,6 @@
 Functions in `R`
 ================
-September 25, 2016
+September 27, 2016
 
 A quick reminder: functions in `R` are declared with the keyword `function` and assigning the declaration to a name:
 

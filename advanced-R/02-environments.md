@@ -1,6 +1,6 @@
 The basics of environments
 ================
-September 25, 2016
+September 27, 2016
 
 Environments are important to understand some of the *quirks* of the `R` language. Environments box names associated to values or as a bag that keeps some names together.
 
@@ -11,13 +11,13 @@ e <- new.env()
 e
 ```
 
-    ## <environment: 0x7f8fe551ed80>
+    ## <environment: 0x7fe521213f80>
 
 ``` r
 parent.env(e)
 ```
 
-    ## <environment: 0x7f8fe2f7b298>
+    ## <environment: 0x7fe5222cf028>
 
 There are four special environments:
 

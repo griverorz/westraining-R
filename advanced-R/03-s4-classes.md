@@ -1,6 +1,6 @@
 Functions and object oriented programming in R
 ================
-September 25, 2016
+September 27, 2016
 
 R supports three object-oriented systems: S3, S4, and RC. The first two implement generic-function OO, which is the most usual in R. The last one, RC, is a message-passing OO which may be familiar to Python or C++ programmers. S4 is more formal and may be an overkill in most cases but I find it clearer.
 
@@ -25,7 +25,7 @@ new("nps", values=sample(0:10, size=10, replace=TRUE), top=9:10, bottom=0:6)
 
     ## An object of class "nps"
     ## Slot "values":
-    ##  [1] 5 9 1 5 5 7 3 4 2 1
+    ##  [1] 10  6  2  1  5  9  3  2  7  8
     ## 
     ## Slot "top":
     ## [1]  9 10
@@ -118,8 +118,8 @@ summary(x)
 ```
 
     ## 
-    ##  0  2  3  5  7  8  9 10 
-    ##  1  3  1  1  1  1  1  1
+    ##  1  2  4  5  8  9 10 
+    ##  1  1  1  3  1  1  2
 
 We can list the methods associated with a class
 
@@ -225,7 +225,7 @@ x
 
     ## An object of class "nps"
     ## Slot "values":
-    ##  [1]  2  3  5 10  7  2  8  9  2  0
+    ##  [1]  9  1 10  5  2  8  5 10  5  4
     ## 
     ## Slot "top":
     ## [1]  8  9 10
@@ -259,7 +259,7 @@ We can also create a `[` method to perform subset and replicate this operation:
 x@values[1:4]
 ```
 
-    ## [1]  2  3  5 10
+    ## [1]  9  1 10  5
 
 The new method takes at least two arguments `x` and `i`:
 
@@ -279,7 +279,7 @@ x[1:4]
 
     ## An object of class "nps"
     ## Slot "values":
-    ## [1]  2  3  5 10
+    ## [1]  9  1 10  5
     ## 
     ## Slot "top":
     ## [1]  8  9 10

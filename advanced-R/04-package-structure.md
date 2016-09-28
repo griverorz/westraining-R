@@ -1,6 +1,6 @@
 Package structure
 ================
-September 25, 2016
+September 27, 2016
 
 The minimal package structure requires:
 
