@@ -1,6 +1,6 @@
 Inference, probability and simulation
 ================
-March 07, 2016
+October 27, 2017
 
 ### Data analysis (cont.)
 
@@ -24,7 +24,8 @@ head(yhat)
 The `predict` method takes a number of uselful arguments, like `newdata`, which applies the estimated coefficients to a new dataset.
 
 ``` r
-my_predictions <- predict(sample_model, newdata=data.frame("age"=54, "child"="yes", religious=1))
+my_predictions <- predict(sample_model,
+                          newdata=data.frame("age"=54, "child"="yes", religious=1))
 my_predictions
 ```
 
@@ -47,8 +48,8 @@ After this small detour, we finally see how to get the confidence intervals:
 
 ``` r
 my_predictions <- predict(sample_model,
-              newdata=data.frame("age"=54, "child"="yes", religious=1),
-              interval="confidence")
+                          newdata=data.frame("age"=54, "child"="yes", religious=1),
+                          interval="confidence")
 my_predictions
 ```
 
@@ -120,9 +121,9 @@ n <- 10
 sd(replicate(999, mean(rnorm(n, 3, 2))))
 ```
 
-    ## [1] 0.615
+    ## [1] 0.644
 
-which is approximately \(\sigma/\sqrt{n}\), as expected.
+which is approximately $\\sigma/\\sqrt{n}$, as expected.
 
 We can also do bootstrap sampling using the same approach. The only thing that we need is something that a function that produces a sample with replacement from a vector:
 
@@ -131,7 +132,7 @@ x <- rnorm(25, 3.2, 1.7)
 sd(replicate(999, mean(sample(x, length(x), replace=TRUE))))
 ```
 
-    ## [1] 0.35
+    ## [1] 0.279
 
 and that matches:
 
@@ -140,6 +141,6 @@ sqrt(vcov(lm(x ~ 1)))
 ```
 
     ##             (Intercept)
-    ## (Intercept)       0.362
+    ## (Intercept)       0.281
 
 With these elements we can now think about, for instance, making extractions of the posterior distribution of the estimated coefficients in the section above to simulate confidence intervals. Or simulate the distribution of transformations of variables. But both tasks are probably easier with tools that we see when we talk about programming.

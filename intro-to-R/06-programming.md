@@ -1,6 +1,6 @@
 The very basics of programming
 ================
-March 07, 2016
+October 27, 2017
 
 One of the very nice features of R when one comes from other statistical software like SAS or Stata is that it is very easy to program. And that is a really good thing, because the manipulation, analysis, and visualization of data is considerably easier when one can write small functions. In addition, because R is open-source, you can inspect what every function does, so it is useful to get a sense of the most basic elements of programming to be able to take advantage of that feature.
 
@@ -24,7 +24,7 @@ my_mean
 ```
 
     ## function(x) sum(x)/length(x)
-    ## <environment: 0x7fe2c57926b0>
+    ## <environment: 0x7ff7633123c8>
 
 The way we defined the function is perfectly valid but we could also be a bit more explicit by enclosing the statement in parenthesis and ensuring that it is returned.
 
@@ -178,7 +178,7 @@ my_sign <- function(x) {
 
 Two things two notice here. First, that `!` is the negation operator (`TRUE == !FALSE`). Second, that `stop` interrupts the evaluation and produces an error, so the function never reaches the next conditional.
 
-The if-else structure is the building block of a rejection sampling algorithm, so let's use to makes samples out of a \(Beta(3,6)\).
+The if-else structure is the building block of a rejection sampling algorithm, so let's use to makes samples out of a *B**e**t**a*(3, 6).
 
 ``` r
 R <- 10000

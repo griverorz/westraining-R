@@ -1,6 +1,6 @@
 Data manipulation and I/O
 ================
-March 07, 2016
+October 27, 2017
 
 ### Data structures (cont.)
 
@@ -99,6 +99,28 @@ load("states.RData")
 states
 ```
 
-But R can also read (and sometimes write) data in other binary formats: data coming from Stata, SAS, SPSS, or even Excel. The functions to handle these foreign formats are provided in the `foreign` package that comes with R. Take a look at [the documentation](https://cran.r-project.org/web/packages/foreign/index.html). We will see how to use additional packages soon enough.
+But R can also read (and sometimes write) data in other binary formats: data coming from Stata, SAS, SPSS, or even Excel. The functions to handle these foreign formats are provided in the `foreign` package that comes with `R` but a much better alternative is the `haven` package which gives us access to functions like `read_sas` to read SAS sas7bdat files or `read_stata` to read Stata dta files.
+
+This package is not provided with R but we need instead to install it and loaded, which gives us a good opportunity to look at importing new functionality into R.
+
+We first need to install the library using:
+
+``` r
+install.packages("haven")
+```
+
+    ## Installing package into '/Users/gonzalorivero/Rlibs'
+    ## (as 'lib' is unspecified)
+
+    ## Warning: unable to access index for repository  https://cran.rstudio.com/src/contrib:
+    ##   cannot open URL ' https://cran.rstudio.com/src/contrib/PACKAGES'
+
+    ## Warning: package 'haven' is not available (for R version 3.4.0)
+
+The function will hit a CRAN mirror, download the file for the package that we want, and perform the installation routine (which includes a number of checks). Now the package is available in our system, we can load it into our session:
+
+``` r
+library(haven)
+```
 
 Now that we can read and manipulate data, we can start doing some analysis. Let's the fun begin!

@@ -1,6 +1,6 @@
 Overview
 ================
-March 07, 2016
+October 27, 2017
 
 **Why R?**
 
@@ -22,7 +22,7 @@ The extension of the R files is usually `.R`
 
 **RStudio**
 
-R can be downloaded from the Comprehensive R Archive Network, [CRAN](https//cran.r-project.org). But we will be using RStudio, a popular IDE. It is possible to use R with other IDE and text editors:
+R can be downloaded from the Comprehensive R Archive Network, [CRAN](https//cran.r-project.org). We will be using RStudio, a popular IDE. it is important to keep in mind that R (the language) and RStudio (the GUI) are separate things, and it is entirely possible to use different workflows with other tools or text editors:
 
 -   `emacs` through [ESS](http://ess.r-project.org/) (what I use).
 -   `vim` with the [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628).
@@ -59,7 +59,9 @@ The documentation of R has a well-earned reputation of being excellent. It can b
 
 The R community is very helpful and active. If you ever get stuck in a problem, the best solution is to ask in [StackOverflow](http://stackoverflow.com/), a very large community of programmers using the `#r` tag.
 
-For obvious reasons, the language is sometimes referred to as "Rstats" (social media and search engines, anyone?).
+For obvious reasons, the language is sometimes referred to as "Rstats" (social media and search engines, amirite?).
+
+Within Westat, there is a growing community of users and we have a number of resources for Q&A and sharing information or announcements.
 
 **About this document**
 
@@ -79,6 +81,6 @@ b <- a + rnorm(N)
 plot(a, b); title("An ugly plot")
 ```
 
-![](assets/unnamed-chunk-2-1.png)
+![](/Users/gonzalorivero/westat/westraining-R/intro-to-R/00-intro_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png)
 
-GitHub and `git` more generally deserve a class on its own, but here it will only be used to host the code.
+GitHub and `git` more generally deserve a class on its own (we cover it in the Advanced R class), but here it will only be used to host the notes.

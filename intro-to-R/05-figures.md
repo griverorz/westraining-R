@@ -1,6 +1,6 @@
 Figures using ggplot2
 ================
-March 07, 2016
+October 27, 2017
 
 The graphical toolbox in R is particularly impressive. I very much like the default plotting library that ships with R: it is clear, simple, and you can build pretty much any figure you can imagine, because it allows to add and manipulate every single element of the figure. However, its flexibility comes at a cost, and figures usually require a lot of work. The `ggplot2`, which implements the "grammar of graphics" approach to building data visualization, has rightfully gained a great deal of popularity, and it is the library that we will use here.
 
