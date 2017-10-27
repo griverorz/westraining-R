@@ -112,15 +112,78 @@ install.packages("haven")
     ## Installing package into '/Users/gonzalorivero/Rlibs'
     ## (as 'lib' is unspecified)
 
-    ## Warning: unable to access index for repository  https://cran.rstudio.com/src/contrib:
-    ##   cannot open URL ' https://cran.rstudio.com/src/contrib/PACKAGES'
-
-    ## Warning: package 'haven' is not available (for R version 3.4.0)
-
 The function will hit a CRAN mirror, download the file for the package that we want, and perform the installation routine (which includes a number of checks). Now the package is available in our system, we can load it into our session:
 
 ``` r
 library(haven)
 ```
 
-Now that we can read and manipulate data, we can start doing some analysis. Let's the fun begin!
+For instance, we can now load an *uncompressed* SAS file using
+
+``` r
+path <- system.file("examples", "iris.sas7bdat", package="haven")
+read_sas(path)
+```
+
+    ## # A tibble: 150 x 5
+    ##    Sepal_Length Sepal_Width Petal_Length Petal_Width Species
+    ##           <dbl>       <dbl>        <dbl>       <dbl>   <chr>
+    ##  1          5.1         3.5          1.4         0.2  setosa
+    ##  2          4.9         3.0          1.4         0.2  setosa
+    ##  3          4.7         3.2          1.3         0.2  setosa
+    ##  4          4.6         3.1          1.5         0.2  setosa
+    ##  5          5.0         3.6          1.4         0.2  setosa
+    ##  6          5.4         3.9          1.7         0.4  setosa
+    ##  7          4.6         3.4          1.4         0.3  setosa
+    ##  8          5.0         3.4          1.5         0.2  setosa
+    ##  9          4.4         2.9          1.4         0.2  setosa
+    ## 10          4.9         3.1          1.5         0.1  setosa
+    ## # ... with 140 more rows
+
+or we could read a Stata file using
+
+``` r
+path <- system.file("examples", "iris.dta", package="haven")
+read_stata(path)
+```
+
+    ## # A tibble: 150 x 5
+    ##    sepallength sepalwidth petallength petalwidth species
+    ##          <dbl>      <dbl>       <dbl>      <dbl>   <chr>
+    ##  1         5.1        3.5         1.4        0.2  setosa
+    ##  2         4.9        3.0         1.4        0.2  setosa
+    ##  3         4.7        3.2         1.3        0.2  setosa
+    ##  4         4.6        3.1         1.5        0.2  setosa
+    ##  5         5.0        3.6         1.4        0.2  setosa
+    ##  6         5.4        3.9         1.7        0.4  setosa
+    ##  7         4.6        3.4         1.4        0.3  setosa
+    ##  8         5.0        3.4         1.5        0.2  setosa
+    ##  9         4.4        2.9         1.4        0.2  setosa
+    ## 10         4.9        3.1         1.5        0.1  setosa
+    ## # ... with 140 more rows
+
+As a matter of fact, one of the good things about `R` is that it interacts nicely with many other programs. For instance, it can read Excel spreadsheets in several different ways. The one I use is through the `readxl` library, which does not require Java. So first, like before, we need to install the package and load it:
+
+``` r
+install.packages("readxl")
+```
+
+    ## Installing package into '/Users/gonzalorivero/Rlibs'
+    ## (as 'lib' is unspecified)
+
+``` r
+library(readxl)
+```
+
+Now we will be able to call a function like `read_excel`
+
+``` r
+read_excel(path)
+```
+
+    ## # A tibble: 3 x 3
+    ##      B3    C3    D3
+    ##   <chr> <chr> <chr>
+    ## 1    B4    C4    D4
+    ## 2    B5    C5    D5
+    ## 3    B6    C6    D6
