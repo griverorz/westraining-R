@@ -3,13 +3,15 @@ title: "Data manipulation and I/O"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   pdf_document: default
-  github_document:
+  github_document: 
     html_preview: false
 ---
 
 ### Data structures (cont.)
 
-`data.frame` is the building block for most of what we will do in data analysis. Think about them as a `matrix` that can hold columns of different types and with column names.
+`data.frame` is the building block for most of what we will do in data analysis.
+Think about them as a `matrix` that can hold columns of different types and with
+column names.
 
 ```{r eval=FALSE}
 states <- data.frame("code"       = c("CA", "NY", "NE", "AZ"), 
@@ -37,7 +39,11 @@ We can edit values putting together a few things that we have seen so far:
 states$population[states$code == "NE"] <- 1.8
 ```
 
-Carefully examine what's happening in the previous line. `states$code` gets the column `code` in our dataset. `states$code == "NE"` returns a logical vector in which only the third observation will be `TRUE`. `states$population[states$code == "NE"]` access the `population` value for Nebraska. And then we assign the correct value 1.8 to it.
+Carefully examine what's happening in the previous line. `states$code` gets the
+column `code` in our dataset. `states$code == "NE"` returns a logical vector in
+which only the third observation will be `TRUE`. `states$population[states$code
+== "NE"]` access the `population` value for Nebraska. And then we assign the
+correct value 1.8 to it.
 
 The same approach can be used for subsetting a dataset:
 ```{r eval=FALSE}
@@ -92,11 +98,13 @@ states
 What about other delimiters and even formats? For other delimiters, we can use
 the more general function `read.table` and `write.table` that allows us to
 specify which delimiter we want to use. Actually, `read.csv` is just
-`read.table` with a predefined delimiter.
+`read.table` with a predefined delimiter
 
 ```{r eval=FALSE}
 states <- read.table("states.csv", sep=",")
 ```
+
+and we could have, for instance, defined that our input is tab separated. 
 
 The most common format for R uses the extension `.RData`, using the functions
 `save` and `load`.
@@ -109,9 +117,68 @@ states
 
 But R can also read (and sometimes write) data in other binary formats: data
 coming from Stata, SAS, SPSS, or even Excel. The functions to handle these
-foreign formats are provided in the `foreign` package that comes with R. Take a
-look at
-[the documentation](https://cran.r-project.org/web/packages/foreign/index.html).
-We will see how to use additional packages soon enough. 
+foreign formats are provided in the `foreign` package that comes with `R` but a
+much better alternative is the `haven` package which gives us access to
+functions like `read_sas` to read SAS sas7bdat files or `read_stata` to read
+Stata dta files.
 
-Now that we can read and manipulate data, we can start doing some analysis. Let's the fun begin!
+This package is not provided with R but we need instead to install it and
+loaded, which gives us a good opportunity to look at importing new functionality
+into R.
+
+We first need to install the library using:
+
+```{r}
+install.packages("haven")
+```
+
+The function will hit a CRAN mirror, download the file for the package that we
+want, and perform the installation routine (which includes a number of checks).
+Now the package is available in our system, we can load it into our session:
+
+```{r}
+library(haven)
+```
+
+For instance, we can now load an _uncompressed_ SAS file using 
+
+```{r}
+path <- system.file("examples", "iris.sas7bdat", package="haven")
+read_sas(path)
+```
+
+or we could read a Stata file using 
+
+```{r}
+path <- system.file("examples", "iris.dta", package="haven")
+read_stata(path)
+```
+
+As a matter of fact, one of the good things about `R` is that it interacts
+nicely with many other programs. For instance, it can read Excel spreadsheets in
+several different ways. The one I use is through the `readxl` library, which
+does not require Java. So first, like before, we need to install the package and
+load it:
+
+```{r}
+install.packages("readxl")
+library(readxl)
+```
+
+Now we will be able to call a function like `read_excel`
+
+```{r include=FALSE}
+path <- readxl_example("geometry.xls")
+```
+
+```{r}
+read_excel(path)
+```
+
+Each of these function has a number of options (Do we want to use a catalog file
+for SAS? In which sheet is the data in our Excel file? How to deal with user
+generated missing values in SPSS?) and of course we can interact with many other
+formats (`feather` for data exchange with Python, fixed width files, hd5, ...),
+connections (PostgreSQL, MongoDB, Microsoft Access, SQL Server, ...), streams
+(for real-time analysis), ... but this is sufficient for now. Let's move on to
+doing something with the data. 

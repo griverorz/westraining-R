@@ -2,8 +2,8 @@
 title: "Figures using ggplot2"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
-  pdf_document: default	
-  github_document:
+  pdf_document: default
+  github_document: 
     html_preview: false
 ---
 
@@ -21,7 +21,9 @@ We first need to install the library using:
 install.packages("ggplot2")
 ```
 
-The function will hit a CRAN mirror, download the file for the package that we want, and perform the installation routine (which includes a number of checks). Now the package is available in our system, we can load it into our session:
+The function will hit a CRAN mirror, download the file for the package that we
+want, and perform the installation routine (which includes a number of checks).
+Now the package is available in our system, we can load it into our session:
 
 ```{r}
 library(ggplot2)
@@ -33,7 +35,11 @@ Let's take a dataset:
 tobacco <- read.csv("http://koaning.io/theme/data/cigarette.csv")
 ```
 
-The structure of a figure in ggplot2 is simple. We first define the data.frame that we will be using, the basic aesthetics for the figure (which variables go to which axis, whether the the dataset is grouped). We use the `ggplot` function for that. Then, we add the different layers of the figure that correspond to the different elements of ghe graph. 
+The structure of a figure in ggplot2 is simple. We first define the data.frame
+that we will be using, the basic aesthetics for the figure (which variables go
+to which axis, whether the the dataset is grouped). We use the `ggplot` function
+for that. Then, we add the different layers of the figure that correspond to the
+different elements of ghe graph.
 
 For instance, to define a density plot, all we need is one variable living in a dataset:
 
@@ -42,7 +48,10 @@ p <- ggplot(tobacco, aes(x=tax))
 p + geom_density()
 ```
 
-Getting the density per year is easy: we declare that data is grouped by year and that the data corresponding to each year will receive a different color. In addition, we add labels and a title (because we love good practices):
+Getting the density per year is easy: we declare that data is grouped by year
+and that the data corresponding to each year will receive a different color. In
+addition, we add labels and a title (because we love good practices):
+
 ```{r}
 p <- ggplot(tobacco, aes(x=tax, group=year, colour=year))
 p + geom_density() +
@@ -50,13 +59,17 @@ p + geom_density() +
 ```
 
 A scatterplot is defined by two dimensions, but the structure remains the same:
+
 ```{r}
 p <- ggplot(tobacco, aes(x=packpc, y=tax))
 p + geom_point() +
     labs(title="Tax rate and tobacco consumption", x="Tax rate", y="Consumption")
 ```
 
-One of the things that I really like about ggplot is how easy it is to overlay exploratory models on top of our data. In this case, we want to add a line that follows a semi-log linear model between the two variables. 
+One of the things that I really like about ggplot is how easy it is to overlay
+exploratory models on top of our data. In this case, we want to add a line that
+follows a semi-log linear model between the two variables.
+
 ```{r}
 p <- ggplot(tobacco, aes(x=packpc, y=tax))
 p + geom_point() +
@@ -64,7 +77,11 @@ p + geom_point() +
     geom_line(stat="smooth", formula= y ~ log(x), method="lm")
 ```
 
-Given the data structure, it seems reasonable to add a different regression line per state. The only thing that we have to do here is to indicate that our data is grouped by that variable. We don't need to create the regression for each state or anything like that. The rest of the changes are mostly to make it look slightly prettier.
+Given the data structure, it seems reasonable to add a different regression line
+per state. The only thing that we have to do here is to indicate that our data
+is grouped by that variable. We don't need to create the regression for each
+state or anything like that. The rest of the changes are mostly to make it look
+slightly prettier.
 
 ```{r}
 p <- ggplot(tobacco, aes(x=packpc, y=tax, group=state, colour=state))

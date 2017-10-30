@@ -2,8 +2,8 @@
 title: "Descriptives and simple statistics"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
-  pdf_document: default	
-  github_document:
+  pdf_document: default
+  github_document: 
     html_preview: false
 extension: footnotes
 ---
@@ -17,7 +17,8 @@ RStudio starst to make sense: we want something that makes it easy to
 edit text files (like navigation tools or syntax highlighting) and also that
 connects to the R interpreter. 
 
-You will probably run the rest of the sessions by typing in the "Code" window and sending things to the console from there.
+You will probably run the rest of the sessions by typing in the "Code" window
+and sending things to the console from there.
 
 ### Basic data analysis
 
@@ -27,17 +28,23 @@ Let's start by reading in some data from the Internet.
 affairs <- read.csv("http://koaning.io/theme/data/affairs.csv")
 ```
 
-The dataset contains data about the number of affairs of 601 politicians and some sociodemographic information. A detailed description of the variables and some interesting results can be found in Fair, R. (1977) "A note on the computation of the tobit estimator", Econometrica, 45, 1723-1727. 
+The dataset contains data about the number of affairs of 601 politicians and
+some sociodemographic information. A detailed description of the variables and
+some interesting results can be found in Fair, R. (1977) "A note on the
+computation of the tobit estimator", Econometrica, 45, 1723-1727.
 
-Let's start by taking a look at the dataset. For instance, we can print the first 6 rows using the function `head`:
+Let's start by taking a look at the dataset. For instance, we can print the
+first 6 rows using the function `head`:
 
 ```{r}
 head(affairs)
 ```
 
-We can also take a look at some descriptives with the function `summary` applied to individuals variables:[^1]
+We can also take a look at some descriptives with the function `summary` applied
+to individuals variables:[^1]
 
-[^1]: The function could be applied to a dataset but I find that amount of information overwhelming.
+[^1]: The function could be applied to a dataset but I find that amount of
+    information overwhelming.
 
 ```{r}
 summary(affairs$nbaffairs)
@@ -49,7 +56,11 @@ and
 summary(affairs$child)
 ```
 
-Notice that `summary` does different things depending on the class of the input it receives. In the first case, `summary` sees a numeric variable and produces the mean and some cutpoints. In the second case, `summary` sees a factor variable (a categorical variable) and produces a frequency table. This is a pattern that we will encounter very frequently in R.
+Notice that `summary` does different things depending on the class of the input
+it receives. In the first case, `summary` sees a numeric variable and produces
+the mean and some cutpoints. In the second case, `summary` sees a factor
+variable (a categorical variable) and produces a frequency table. This is a
+pattern that we will encounter very frequently in R.
 
 We can be more specific about getting a frequency table by using:
 
@@ -57,13 +68,21 @@ We can be more specific about getting a frequency table by using:
 table(affairs$child)
 ```
 
-To transform the previous table into a frequency we can take several routes, both illustrative of the way R works relative to software like SAS or Stata. The first one is to do it manually, by just dividing the frecuencies by the total size, calculated by summing over the column `children`. It is convenient here to remember that `child` is a factor that indicates whether the politician has children or not. Therefore, the number of observations is just the length of the vector.
+To transform the previous table into a frequency we can take several routes,
+both illustrative of the way R works relative to software like SAS or Stata. The
+first one is to do it manually, by just dividing the frecuencies by the total
+size, calculated by summing over the column `children`. It is convenient here to
+remember that `child` is a factor that indicates whether the politician has
+children or not. Therefore, the number of observations is just the length of the
+vector.
 
 ```{r}
 table(affairs$child)/length(affairs$child) ## We could also have used nrow(affairs)
 ```
 
-Note that we don't create new variables in between but instead we perform the operation on-the-fly with the output of the two functions. The second option is to compose two functions together:
+Note that we don't create new variables in between but instead we perform the
+operation on-the-fly with the output of the two functions. The second option is
+to compose two functions together:
 
 ```{r}
 prop.table(table(affairs$child))
@@ -73,14 +92,18 @@ The output of `table` is passed to `prop.table` which transforms a table into pr
 
 ### Hypothesis testing
 
-We can now start analyzing the data. For instance, we would like to check the difference in the mean of the number of affairs by whether the politician has children or not. The sample mean for each group can be calculated as:
+We can now start analyzing the data. For instance, we would like to check the
+difference in the mean of the number of affairs by whether the politician has
+children or not. The sample mean for each group can be calculated as:
 
 ```{r eval=FALSE}
 mean(affairs$nbaffairs[affairs$child == "no"])
 mean(affairs$nbaffairs[affairs$child == "yes"])
 ```
 
-A t-test can be performed in several ways. The most natural one for new people to R is passing variables. For instance, if we wanted to test one variable against the standard null:
+A t-test can be performed in several ways. The most natural one for new people
+to R is passing variables. For instance, if we wanted to test one variable
+against the standard null:
 
 ```{r}
 t.test(affairs$nbaffairs)
@@ -91,22 +114,36 @@ We can also test equality of two means by passing _two_ vectors to the function:
 t.test(affairs$nbaffairs[affairs$child == "no"], affairs$nbaffairs[affairs$child == "yes"])
 ```
 
-The thing to notice here is that the second vector is a second _optional argument_ to the function and, by passing it, the function performs a different routine. Let's take a look at the documentation for `t.test`:
+The thing to notice here is that the second vector is a second _optional
+argument_ to the function and, by passing it, the function performs a different
+routine. Let's take a look at the documentation for `t.test`:
 
 ```{r eval=FALSE}
 ?t.test
 ```
 
-We see that there are two separate _methods_ (more about this in a second) for interacting with `t.test`: the one we just used, passing arguments `x` and maybe `y`, and another one that usesa `formula`. Formulas play a huge role in R:
+We see that there are two separate _methods_ (more about this in a second) for
+interacting with `t.test`: the one we just used, passing arguments `x` and maybe
+`y`, and another one that usesa `formula`. Formulas play a huge role in R:
 
 ```{r}
 my_test <- t.test(nbaffairs ~ child, data=affairs)
 my_test
 ```
 
-The LHS is the variable we want to test but split by the groups indicated in the RHS. The argument `data` indicates where those two variables live: they are columns of the dataset `affairs`. The formula interface probably makes a lot more sense if we consider how we would run the same test using a linear model, which we will see in a moment. The outcome variable is the LHS of the equation in which we separate the equal sign with a `~`. The RHS is a dummy variable (a factor) that splits the sample in two groups. There are other ways to pass data to the t test. Take a look at the documentation for more information.
+The LHS is the variable we want to test but split by the groups indicated in the
+RHS. The argument `data` indicates where those two variables live: they are
+columns of the dataset `affairs`. The formula interface probably makes a lot
+more sense if we consider how we would run the same test using a linear model,
+which we will see in a moment. The outcome variable is the LHS of the equation
+in which we separate the equal sign with a `~`. The RHS is a dummy variable (a
+factor) that splits the sample in two groups. There are other ways to pass data
+to the t test. Take a look at the documentation for more information.
 
-Note that we have not just printed the output of running the t-test. Instead, we have assigned a name to that output, because it is an object that contains a lot more information than what is printed in the screen. This is the most distinctive feature of R with respect to other statistical languages. 
+Note that we have not just printed the output of running the t-test. Instead, we
+have assigned a name to that output, because it is an object that contains a lot
+more information than what is printed in the screen. This is the most
+distinctive feature of R with respect to other statistical languages.
 
 We can inspect the contents of the `my_test` object using the function `str`:
 
@@ -114,7 +151,12 @@ We can inspect the contents of the `my_test` object using the function `str`:
 str(my_test)
 ```
 
-Note that `my_test` is a list that contains all the information pertaining to the t-test we ran. It contains the statistic, the degrees of freedom, the confidence interval, ... and more importantly, we can access all of those elements and use them elsewhere. For instance, we can get the test statistic from the element `statistic`, or the confidence interval or the estimate by accessing the elements in the list:
+Note that `my_test` is a list that contains all the information pertaining to
+the t-test we ran. It contains the statistic, the degrees of freedom, the
+confidence interval, ... and more importantly, we can access all of those
+elements and use them elsewhere. For instance, we can get the test statistic
+from the element `statistic`, or the confidence interval or the estimate by
+accessing the elements in the list:
 
 ```{r eval=FALSE}
 my_test$statistic
@@ -122,32 +164,51 @@ my_test$conf.int
 my_test$estimate
 ```
 
-It is a good moment to go back to the documentation and compare the output of the test against the "Value" section of the help file.
+It is a good moment to go back to the documentation and compare the output of
+the test against the "Value" section of the help file.
 
-Let's take a deeper look into the formula interface and the structure of objects using a linear model.
+Let's take a deeper look into the formula interface and the structure of objects
+using a linear model.
 
 ## The formula interface 
 
-Consider the case in which we can to now run a regression on the number of affairs using information about. Do not much attention to the theortical soundness of the analysis:
+Consider the case in which we can to now run a regression on the number of
+affairs using information about. Do not much attention to the theortical
+soundness of the analysis:
 
 ```{r}
 sample_model <- lm(nbaffairs ~ I(age - 18)*child + factor(religious), data=affairs)
 ```
 
-We can see here the elegance of the formula interface. The model is doing several things. First, we are recentering age so that 18 is the new 0 value. It is important that the expression is wrapped in the `I()` function to ensure that the `-` inside is taken as an arithmetical operator and not as a formula operator. Then,  multiply that new variable by the variable `child` which is a factor, which uses `yes` as the reference level in the dummy expansion. Not only that, the `*` operator creates the full interaction including the main effects. Finally, although `religious` is an numerical variable, we pass it through `factor` to cast it into a categorical with $n - 1$ dummies. As we can see, the formula takes care of a lot of the transformations and lets us express the structure of the model very succintly. We could have passed the transformed data directly (look at the `y` and `x` arguments in the `lm` documentation), but this approach is considerably easier.
+We can see here the elegance of the formula interface. The model is doing
+several things. First, we are recentering age so that 18 is the new 0 value. It
+is important that the expression is wrapped in the `I()` function to ensure that
+the `-` inside is taken as an arithmetical operator and not as a formula
+operator. Then, multiply that new variable by the variable `child` which is a
+factor, which uses `yes` as the reference level in the dummy expansion. Not only
+that, the `*` operator creates the full interaction including the main effects.
+Finally, although `religious` is an numerical variable, we pass it through
+`factor` to cast it into a categorical with $n - 1$ dummies. As we can see, the
+formula takes care of a lot of the transformations and lets us express the
+structure of the model very succintly. We could have passed the transformed data
+directly (look at the `y` and `x` arguments in the `lm` documentation), but this
+approach is considerably easier.
 
 Lets take a look at the object to see the estimated coefficients:
 ```{r}
 sample_model
 ```
 
-Sometimes that is the only information that we need, but most of the time we want to make inference with those coefficients. We can see this information by getting a `summary` of the object: 
+Sometimes that is the only information that we need, but most of the time we
+want to make inference with those coefficients. We can see this information by
+getting a `summary` of the object:
 ```{r}
 summary_model <- summary(sample_model)
 summary_model
 ```
 
-Let's see how the two objects (`sample_model` and `summary_model`) differ by taking a look at what they contain:
+Let's see how the two objects (`sample_model` and `summary_model`) differ by
+taking a look at what they contain:
 
 ```{r}
 names(sample_model)
@@ -156,7 +217,10 @@ names(summary_model)
 
 ### The shortest introduction to objects and methods
 
-This is one of the beauties of R as an statistical language. The object `summary_model` now holds all the information about the model. We could for instance retrieve the coefficients and the covariace matrix to get the normal-based confidence intervals:
+This is one of the beauties of R as an statistical language. The object
+`summary_model` now holds all the information about the model. We could for
+instance retrieve the coefficients and the covariace matrix to get the
+normal-based confidence intervals:
 
 ```{r}
 coefficients(sample_model) + qt(0.975, df=sample_model$df.residual)*sqrt(diag(vcov(sample_model)))
@@ -167,16 +231,25 @@ and check that the result matches the outcome of the built-in function:
 confint(sample_model)
 ```
 
-The two lines previous illustrate the way R works. `sample_model` is an object that contains a number of _attributes_ like the coefficients or the residual degrees-of-freedom that were obtained when we fit the model. We access these attributes either through functions like `coefficients` or through the `$` operator, because `sample_model` is still a list. 
+The two lines previous illustrate the way R works. `sample_model` is an object
+that contains a number of _attributes_ like the coefficients or the residual
+degrees-of-freedom that were obtained when we fit the model. We access these
+attributes either through functions like `coefficients` or through the `$`
+operator, because `sample_model` is still a list.
 
 ```{r}
 names(sample_model)
 ```
 
-On the other hand, we can make operations over the elements in `sample_model`. Moreover, these function will know that they are being applied to the outcome of a linear model, because that information is given by the class to which `sample_model` belongs.
+On the other hand, we can make operations over the elements in `sample_model`.
+Moreover, these function will know that they are being applied to the outcome of
+a linear model, because that information is given by the class to which
+`sample_model` belongs.
 
 ```{r}
 class(sample_model)
 ```
 
-In this case, `sample_model` does not contain the confidence interval (why should it?), but `confint` knows where to look for the information it needs in the object. `confint` is therefore a _method_.
+In this case, `sample_model` does not contain the confidence interval (why
+should it?), but `confint` knows where to look for the information it needs in
+the object. `confint` is therefore a _method_.

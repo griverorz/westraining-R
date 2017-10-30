@@ -2,34 +2,26 @@
 title: "Overview"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
-  pdf_document: default
-  github_document:
+  github_document: 
     html_preview: false
+  pdf_document: default	  
 ---
 
-```{r setup, include=FALSE, cache=FALSE}
-knitr::opts_chunk$set(fig.path = 'assets/')
-```
 
 **Why R?**
 
-- Open source and extensible. It is also free of charge. More importantly, you (and the community)
-  can inspect the code for any function.
-- Very popular _programing language_ for statistics. "It promotes
-  experimentation and exploration, which improves data analysis." Lots of
-  libraries for all kinds of specialized tasks.
-- Great for visualization. Excellent packages for graphics.
-- Excellent documentation and online help.
-- A very active and helpful community.
+- Open source and extensible. It is also free of charge. More importantly, you (and the community) can inspect the code for any function.
+-	Very popular *programing language* for statistics. "It promotes experimentation and exploration, which improves data analysis." Lots of libraries for all kinds of specialized tasks.
+-	Great for visualization. Excellent packages for graphics.
+-	Excellent documentation and online help.
+-	A very active and helpful community.
 
 **What is R anyway?**
 
-If you are coming from SAS or Stata, you are better off thinking about it as a programming language and not as a
-statistical environment:
+If you are coming from SAS or Stata, you are better off thinking about it as a programming language and not as a statistical environment:
 
-- Interpreted: allows direct executions of code, which makes it slower than
-  compiled languages.
-- Dynamically typed: Easy and less boiler plate, makes metaprogramming a lot easier. 
+- Interpreted: allows direct executions of code, which makes it slower than compiled languages.
+- Dynamically typed: Easy and less boiler plate, makes metaprogramming a lot easier.
 - Multi-paradigm. Although most users exploit object orientation.
 
 The extension of the R files is usually `.R`
@@ -37,8 +29,10 @@ The extension of the R files is usually `.R`
 **RStudio**
 
 R can be downloaded from the Comprehensive R Archive Network,
-[CRAN](https//cran.r-project.org). But we will be using RStudio, a popular IDE.
-It is possible to use R with other IDE and text editors:
+[CRAN](https//cran.r-project.org). We will be using RStudio, a popular IDE. it
+is important to keep in mind that R (the language) and RStudio (the GUI) are
+separate things, and it is entirely possible to use different workflows with
+other tools or text editors:
 
 - `emacs` through [ESS](http://ess.r-project.org/) (what I use).
 - `vim` with the [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628).
@@ -89,7 +83,10 @@ The R community is very helpful and active. If you ever get stuck in a problem, 
 programmers using the `#r` tag. 
 
 For obvious reasons, the language is sometimes referred to as "Rstats" (social
-media and search engines, anyone?).
+media and search engines, amirite?).
+
+Within Westat, there is a growing community of users and we have a number of
+resources for Q&A and sharing information or announcements. 
 
 **About this document**
 
@@ -115,5 +112,5 @@ b <- a + rnorm(N)
 plot(a, b); title("An ugly plot")
 ```
 
-GitHub and `git` more generally deserve a class on its own, but here it will
-only be used to host the code.
+GitHub and `git` more generally deserve a class on its own (we cover it in the
+Advanced R class), but here it will only be used to host the notes.
