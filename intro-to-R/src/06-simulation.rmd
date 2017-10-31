@@ -1,6 +1,6 @@
 
 --- 
-title: "Figures using `ggplot2`"
+title: "Simulation and probability"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   pdf_document: default

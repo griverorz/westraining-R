@@ -1,5 +1,5 @@
 --- 
-title: "Figures using ggplot2"
+title: "Figures using `ggplot2`"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   pdf_document: default
@@ -10,6 +10,8 @@ output:
 ```{r setup, include=FALSE, cache=FALSE}
 knitr::opts_chunk$set(fig.path = './assets/', fig.width=8, fig.height=6)
 ```
+
+### Figures using `ggplot2`
 
 The graphical toolbox in R is particularly impressive. I very much like the
 default plotting library that ships with R: it is clear, simple, and you can
