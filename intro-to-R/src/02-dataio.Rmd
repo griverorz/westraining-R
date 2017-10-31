@@ -46,7 +46,11 @@ states[states$population > 10,] # Notice the comma!
 subset(states, population > 10)
 ```
 
-Let's take the code apart. We want to take the dataset `states` and keep only the rooms for which the statement `states$population > 10` is true. As we saw before, the comparison actually returns a logical vector that has value TRUE when the condition is met. We can then select rows from the data by simply passing this logical vector to the dimension that captures the rows. 
+Let's take the code apart. We want to take the dataset `states` and keep only
+the rooms for which the statement `states$population > 10` is true. As we saw
+before, the comparison actually returns a logical vector that has value `TRUE`
+when the condition is met. We can then select rows from the data by simply
+passing this logical vector to the dimension that captures the rows.
 
 We can use the same strategy to do recoding:
 
