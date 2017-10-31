@@ -1,6 +1,6 @@
 Overview
 ================
-October 27, 2017
+October 30, 2017
 
 **Why R?**
 
@@ -22,7 +22,7 @@ The extension of the R files is usually `.R`
 
 **RStudio**
 
-R can be downloaded from the Comprehensive R Archive Network, [CRAN](https//cran.r-project.org). We will be using RStudio, a popular IDE. it is important to keep in mind that R (the language) and RStudio (the GUI) are separate things, and it is entirely possible to use different workflows with other tools or text editors:
+R can be downloaded from the Comprehensive R Archive Network, [CRAN](https//cran.r-project.org). We will be using RStudio, a popular IDE. It is important to keep in mind that R (the language) and RStudio (the GUI) are separate things, and it is entirely possible to use different workflows with other tools or text editors:
 
 -   `emacs` through [ESS](http://ess.r-project.org/) (what I use).
 -   `vim` with the [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628).
@@ -34,7 +34,7 @@ There is a constantly growing collection of materials available offline and onli
 
 A good overview for beginners is [Learning R](http://shop.oreilly.com/product/0636920028352.do).
 
-SAS users may find useful [R for SAS and SPSS users](http://www.springer.com/us/book/9781461406846), although I have never used it myself (I don't know SAS).
+SAS users may find useful [R for SAS and SPSS users](http://www.springer.com/us/book/9781461406846), although I have never used it myself.
 
 For the analysis of compley survey data, you may want to take a look to ["Complex Surveys. A Guide to Analysis Using R"](http://r-survey.r-forge.r-project.org/svybook/).
 
