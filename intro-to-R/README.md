@@ -70,4 +70,4 @@ advanced usage of R. For instance,
 - Non-standard evaluation
 - Package development
 
-Some of them may be covered in the advanced class.
+They are covered in the advanced class.
