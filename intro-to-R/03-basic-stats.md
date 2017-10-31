@@ -1,7 +1,3 @@
-Descriptives and simple statistics
-================
-October 27, 2017
-
 ### Moving from the prompt to the script
 
 So far, we have been doing everything through on the interpreter directly. We will use the interpreter a lot during data analysis to test things, but it is probably a good idea to keep our code somewhere. Here is when using a tool like RStudio starst to make sense: we want something that makes it easy to edit text files (like navigation tools or syntax highlighting) and also that connects to the R interpreter.

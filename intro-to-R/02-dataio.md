@@ -1,7 +1,3 @@
-Data manipulation and I/O
-================
-October 27, 2017
-
 ### Data structures (cont.)
 
 `data.frame` is the building block for most of what we will do in data analysis. Think about them as a `matrix` that can hold columns of different types and with column names.
@@ -27,21 +23,6 @@ We can also add new variables:
 states$spanish <- c(28.5, 15.7, NA, 19.5)
 ```
 
-We can edit values putting together a few things that we have seen so far:
-
-``` r
-states$population[states$code == "NE"] <- 1.8
-```
-
-Carefully examine what's happening in the previous line. `states$code` gets the column `code` in our dataset. `states$code == "NE"` returns a logical vector in which only the third observation will be `TRUE`. `states$population[states$code == "NE"]` access the `population` value for Nebraska. And then we assign the correct value 1.8 to it.
-
-The same approach can be used for subsetting a dataset:
-
-``` r
-states[states$population > 10,] # Notice the comma!
-subset(states, population > 10)
-```
-
 Transformation of variables is straightforward:
 
 ``` r
@@ -49,6 +30,23 @@ states$spanish <- states$spanish * states$population # But we could have used a 
 ```
 
 But we will see soon that we don't need to do most of this transformations.
+
+The same approach can be used for subsetting a dataset, i.e., selecting rows from a `data.frame` based on given values:
+
+``` r
+states[states$population > 10,] # Notice the comma!
+subset(states, population > 10)
+```
+
+Let's take the code apart. We want to take the dataset `states` and keep only the rooms for which the statement `states$population > 10` is true. As we saw before, the comparison actually returns a logical vector that has value `TRUE` when the condition is met. We can then select rows from the data by simply passing this logical vector to the dimension that captures the rows.
+
+We can use the same strategy to do recoding:
+
+``` r
+states$population[states$code == "NE"] <- 1.8
+```
+
+Carefully examine what's happening in the previous line. `states$code` gets the column `code` in our dataset. `states$code == "NE"` returns a logical vector in which only the third observation will be `TRUE`. `states$population[states$code == "NE"]` access the `population` value for Nebraska. And then we assign the correct value 1.8 to it. The underlying idea is that we select the observations that we want to transform and replace them.
 
 The dataset is also useful to think about variable types. Consider the variable `region`: it is a vector of characters, but we would like to consider it as a discrete variable in which we would represent it as a value (a number) with a label (the region name). That's a `factor` in R.
 
@@ -85,13 +83,19 @@ states <- read.csv("states.csv")
 states
 ```
 
-What about other delimiters and even formats? For other delimiters, we can use the more general function `read.table` and `write.table` that allows us to specify which delimiter we want to use. Actually, `read.csv` is just `read.table` with a predefined delimiter.
+What about other delimiters and even formats? For other delimiters, we can use the more general function `read.table` and `write.table` that allows us to specify which delimiter we want to use. Actually, `read.csv` is just `read.table` with a predefined delimiter
 
 ``` r
 states <- read.table("states.csv", sep=",")
 ```
 
-The most common format for R uses the extension `.RData`, using the functions `save` and `load`.
+and we could have, for instance, defined that our input is tab separated by specifying
+
+``` r
+states <- read.table("states.csv", sep="\t")
+```
+
+The most common format for R uses the extension `.RData` (or `RDS`), using the functions `save` (`saveRDS`) and `load` (`readRDS`):
 
 ``` r
 save(states, file="states.RData")
@@ -187,3 +191,5 @@ read_excel(path)
     ## 1    B4    C4    D4
     ## 2    B5    C5    D5
     ## 3    B6    C6    D6
+
+Each of these function has a number of options (Do we want to use a catalog file for SAS? In which sheet is the data in our Excel file? How to deal with user generated missing values in SPSS?) and of course we can interact with many other formats (`feather` for data exchange with Python, fixed width files, hd5, ...), connections (PostgreSQL, MongoDB, Microsoft Access, SQL Server, ...), streams (for real-time analysis), ... but this is sufficient for now. Let's move on to doing something with the data.
