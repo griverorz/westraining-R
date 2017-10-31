@@ -1,0 +1,125 @@
+---
+title: "Inference"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document: default
+  github_document: 
+    html_preview: false
+---
+
+### Data analysis (cont.)
+
+Let's take a more careful look at the model we fit before:
+
+```{r}
+affairs <- read.csv("http://koaning.io/theme/data/affairs.csv")
+sample_model <-  lm(nbaffairs ~ I(age - 18)*child + factor(religious), data=affairs)
+```
+
+We took a look at some values of interest, like the estimated coefficients or
+the confidence intervals around them. It may also be interesting to take a look
+at predictions on the original dataset that we used (remember that
+`sample_model` carries the data used to fit the model).
+
+```{r}
+yhat <- predict(sample_model)
+head(yhat)
+```
+
+The `predict` method takes a number of useful arguments, like `newdata`, which
+applies the estimated coefficients to a new dataset.
+
+```{r}
+my_predictions <- predict(sample_model,
+                          newdata=data.frame("age"=54, "child"="yes", religious=1))
+my_predictions
+``` 
+
+Usually, we want to see predictions with their uncertainty. Let's take a look at
+the documentation to see how to get confidence intervals:
+
+```{r eval=FALSE}
+?predict
+```
+
+Not very useful, right? The reason is that `predict` is a _generic function_
+that operates on different kinds of objects/models. Think about predictions for
+a linear model or for a logistic regression. They are still predictions but they
+are calculated differently and they should be offering different options. But
+they user should not need to remember the class of the model that was fit: and
+the end of the day, we have been insisting on the fact that objects in `R` carry a
+lot of information around. If we look at the bottom of the help file, we will
+see the method for `lm` models, which is what we want:
+
+```{r eval=FALSE}
+?predict.lm
+```
+
+After this small detour, we finally see how to get the confidence intervals:
+
+```{r}
+my_predictions <- predict(sample_model,
+                          newdata=data.frame("age"=54, "child"="yes", religious=1),
+                          interval="confidence")
+my_predictions
+```
+
+### A bit more on modeling
+
+We can think about running some other kinds of models on our dataset. For
+instance, we could think about running a logistic regression.
+
+```{r}
+logit_model <-  glm(I(nbaffairs > 0) ~ I(age - 18)*child + factor(religious), 
+                    data=affairs, 
+                    family=binomial(link="logit")) # link="logit" is the default
+summary(logit_model)
+```
+
+Nothing in the previous call should be odd, we just applied the same logic as
+before but to a new particular type of model.
+
+One of the things that we could do now is check to what extent the model is
+performing well. We could take a significance testing approach, but we could
+also evaluate performance in terms of prediction. We are dealing with a
+categorical output, so we could for instance check the confusion matrix that is
+implicit from predicting probabilities:
+
+```{r}
+phat <- predict(logit_model, newdata=affairs, type="response")
+table(affairs$nbaffairs > 0, phat > 0.5, dnn=list("Observed", "Predicted"))
+```
+
+The model performs poorly, but that's probably because the model predicts low
+probabilities to a positive event (an affair). We could then play with the
+probability threshold to have a more realistic confusion matrix:
+
+```{r}
+table(affairs$nbaffairs > 0, phat > quantile(phat, .5), dnn=list("Observed", "Predicted"))
+```
+
+Still not a good performance, but still much better than the original matrix we got. 
+
+We could also explore the predictors and see their marginal effects. For
+instance, by checking how the probability of a positive even changes as we move
+some of the variables on the RHS. One way of accomplishing this is by, for
+instance, applying our model to a grid of variables:
+
+```{r}
+fake_data <- expand.grid(age = c(18, 36, 54, 72), 
+                         child = c("no", "yes"), 
+                         religious = 1)
+fake_data$prediction <- predict(logit_model, newdata=fake_data, type="response")
+fake_data
+```
+
+We did two things here. First, we created a fake dataset by expanding on all the
+combinations of the values that were passed to `expand.grid`. Then, we applied
+our predicted model to this new dataset and got the predicted probabilities for
+each case. Notice I put those predictions back on the fake dataset to be able to
+see to what combination each prediction corresponds.
+
+We can now see how the change in the probability for different combinations of
+the age and child variable. But inspecting the model this way may be hard. It is
+probably better to accomplish this with plots.
+
