@@ -33,7 +33,22 @@ We can also add new variables:
 states$spanish <- c(28.5, 15.7, NA, 19.5)
 ```
 
-We can edit values putting together a few things that we have seen so far:
+Transformation of variables is straightforward:
+```{r eval=FALSE}
+states$spanish <- states$spanish * states$population # But we could have used a new variable
+```
+
+But we will see soon that we don't need to do most of this transformations.
+
+The same approach can be used for subsetting a dataset, i.e., selecting rows from a `data.frame` based on given values:
+```{r eval=FALSE}
+states[states$population > 10,] # Notice the comma!
+subset(states, population > 10)
+```
+
+Let's take the code apart. We want to take the dataset `states` and keep only the rooms for which the statement `states$population > 10` is true. As we saw before, the comparison actually returns a logical vector that has value TRUE when the condition is met. We can then select rows from the data by simply passing this logical vector to the dimension that captures the rows. 
+
+We can use the same strategy to do recoding:
 
 ```{r eval=FALSE}
 states$population[states$code == "NE"] <- 1.8
@@ -43,20 +58,7 @@ Carefully examine what's happening in the previous line. `states$code` gets the
 column `code` in our dataset. `states$code == "NE"` returns a logical vector in
 which only the third observation will be `TRUE`. `states$population[states$code
 == "NE"]` access the `population` value for Nebraska. And then we assign the
-correct value 1.8 to it.
-
-The same approach can be used for subsetting a dataset:
-```{r eval=FALSE}
-states[states$population > 10,] # Notice the comma!
-subset(states, population > 10)
-```
-
-Transformation of variables is straightforward:
-```{r eval=FALSE}
-states$spanish <- states$spanish * states$population # But we could have used a new variable
-```
-
-But we will see soon that we don't need to do most of this transformations.
+correct value 1.8 to it. The underlying idea is that we select the observations that we want to transform and replace them. 
 
 The dataset is also useful to think about variable types. Consider the variable
 `region`: it is a vector of characters, but we would like to consider it as a
@@ -104,10 +106,14 @@ specify which delimiter we want to use. Actually, `read.csv` is just
 states <- read.table("states.csv", sep=",")
 ```
 
-and we could have, for instance, defined that our input is tab separated. 
+and we could have, for instance, defined that our input is tab separated by specifying 
 
-The most common format for R uses the extension `.RData`, using the functions
-`save` and `load`.
+```{r eval=FALSE}
+states <- read.table("states.csv", sep="\t")
+```
+
+The most common format for R uses the extension `.RData` (or `RDS`), using the functions
+`save` (`saveRDS`) and `load` (`readRDS`):
 
 ```{r eval=FALSE}
 save(states, file="states.RData")

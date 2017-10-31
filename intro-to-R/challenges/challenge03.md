@@ -25,4 +25,5 @@
 	dta$attr1 <- ifelse(rbinom(125, 1, 0.85), rpois(125, .5), NA)
 	```
 
-	Write a function that calculates a weighted average and apply it to the dataset to get the weighted average of `attr1` for each household.
+	Write a function that calculates a weighted average and apply it to the
+    dataset to get the weighted average of `attr1` for each household.

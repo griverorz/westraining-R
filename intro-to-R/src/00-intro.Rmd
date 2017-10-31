@@ -29,7 +29,7 @@ The extension of the R files is usually `.R`
 **RStudio**
 
 R can be downloaded from the Comprehensive R Archive Network,
-[CRAN](https//cran.r-project.org). We will be using RStudio, a popular IDE. it
+[CRAN](https//cran.r-project.org). We will be using RStudio, a popular IDE. It
 is important to keep in mind that R (the language) and RStudio (the GUI) are
 separate things, and it is entirely possible to use different workflows with
 other tools or text editors:
@@ -51,7 +51,7 @@ A good overview for beginners is
 
 SAS users may find useful
 [R for SAS and SPSS users](http://www.springer.com/us/book/9781461406846),
-although I have never used it myself (I don't know SAS).
+although I have never used it myself.
 
 For the analysis of compley survey data, you may want to take a look to ["Complex
 Surveys. A Guide to Analysis Using R"](http://r-survey.r-forge.r-project.org/svybook/). 
