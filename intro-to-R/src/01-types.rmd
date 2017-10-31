@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
-knitr::opts_chunk$set(fig.path = 'assets/')
+knitr::opts_chunk$set(fig.path = './assets/')
 ```
 
 ### The interpreter

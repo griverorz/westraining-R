@@ -5,8 +5,12 @@ output:
   pdf_document: default
   github_document: 
     html_preview: false
-
 ---
+
+
+```{r setup, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(fig.path = './assets/')
+```
 
 
 **Why R?**
