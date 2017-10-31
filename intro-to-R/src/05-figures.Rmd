@@ -3,8 +3,8 @@ title: "Figures using ggplot2"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   pdf_document: default
-  github_document: 
-    html_preview: false
+  md_document:
+    variant: markdown_github
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
@@ -57,7 +57,7 @@ The `ggplot2`, which implements the "grammar of graphics" approach to building
 data visualization, has rightfully gained a great deal of popularity, and it is
 the library that we will use here.
 
-```{r eval=FALSE}
+```{r}
 install.packages("ggplot2")
 library(ggplot2)
 ```

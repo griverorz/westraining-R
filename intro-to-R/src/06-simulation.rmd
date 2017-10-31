@@ -1,11 +1,11 @@
 
 --- 
-title: "Simulation and probability"
+title: "Figures using `ggplot2`"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   pdf_document: default
-  github_document: 
-    html_preview: false
+  md_document:
+    variant: markdown_github
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}

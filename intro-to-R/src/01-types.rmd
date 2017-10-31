@@ -2,9 +2,9 @@
 title: "The R building blocks"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
-  pdf_document: default	
-  github_document:
-    html_preview: false
+  pdf_document: default
+  md_document:
+    variant: markdown_github
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
